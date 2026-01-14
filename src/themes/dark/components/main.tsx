@@ -65,6 +65,7 @@ export default function MainVintageJawaDarkPage() {
             <source src={ASSETS.Motion} type="video/mp4" />
           </video>
         </div>
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -100,7 +101,25 @@ export default function MainVintageJawaDarkPage() {
           </motion.p>
         </motion.div>
       </div>
-      <div className="h-dvh bg-black"></div>
+
+      <div
+        className="relative flex min-h-dvh w-full flex-col items-center justify-center bg-cover bg-fixed bg-center bg-no-repeat text-white"
+        style={{
+          backgroundImage: `url('${ASSETS.Cover.src || ASSETS.Cover}')`,
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative z-10 p-10 text-center">
+          <h2 className={`${FONT.vidaloka?.className} mb-4 text-4xl`}>
+            Save The Date
+          </h2>
+          <p className="max-w-md text-sm leading-relaxed">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+            Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
+          </p>
+          <div className="mt-10 h-20"></div>
+        </div>
+      </div>
     </>
   );
 }
