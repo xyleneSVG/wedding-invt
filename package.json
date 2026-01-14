@@ -9,7 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "file-loader": "^6.2.0",
+    "framer-motion": "^12.26.2",
+    "lucide-react": "^0.562.0",
     "next": "16.1.1",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
