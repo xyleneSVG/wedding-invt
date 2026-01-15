@@ -19,14 +19,22 @@ export default function Page() {
   };
 
   const handleIntroEnd = () => {
-    setStage("MAIN");
+    setIsWhite(true);
+    setTimeout(() => {
+      setStage("MAIN");
+      setTimeout(() => {
+        setIsWhite(false);
+      }, 500);
+    }, 1000);
   };
 
-  // Logic Baru: Cek setiap milidetik saat video berjalan
   const handleTimeUpdate = () => {
     if (introVideoRef.current) {
-      // Jika waktu sudah >= 10 detik, potong dan pindah ke Main
-      if (introVideoRef.current.currentTime >= 10) {
+      if (
+        introVideoRef.current.currentTime >= 10 &&
+        !isWhite &&
+        stage === "INTRO"
+      ) {
         handleIntroEnd();
       }
     }
@@ -47,15 +55,17 @@ export default function Page() {
             autoPlay
             muted={false}
             playsInline
+            preload="auto"
             className="h-full w-full object-cover"
             onTimeUpdate={handleTimeUpdate}
+            style={{ transform: "translateZ(0)" }}
           >
             <source src={ASSETS.Motion} type="video/mp4" />
           </video>
 
           <button
             onClick={handleIntroEnd}
-            className="absolute right-5 bottom-10 rounded-full border border-white/30 px-4 py-2 text-xs text-white opacity-50 hover:opacity-100"
+            className="absolute right-5 bottom-10 z-10 rounded-full border border-white/30 px-4 py-2 text-xs text-white opacity-50 hover:opacity-100"
           >
             Skip Intro
           </button>
@@ -65,7 +75,7 @@ export default function Page() {
       {stage === "MAIN" && <MainPage />}
 
       <div
-        className={`pointer-events-none fixed inset-0 z-100 bg-white transition-opacity duration-1000 ease-in-out ${
+        className={`pointer-events-none fixed inset-0 z-9999 bg-white transition-opacity duration-1000 ease-in-out ${
           isWhite ? "opacity-100" : "opacity-0"
         }`}
       ></div>

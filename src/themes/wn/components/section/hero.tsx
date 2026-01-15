@@ -15,7 +15,7 @@ export default function HeroSection({ isActive }: SectionProps) {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 10;
+      videoRef.current.currentTime = 11;
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {});
@@ -25,7 +25,7 @@ export default function HeroSection({ isActive }: SectionProps) {
 
   const handleVideoLoop = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 10;
+      videoRef.current.currentTime = 11;
       videoRef.current.play();
     }
   };
@@ -65,7 +65,7 @@ export default function HeroSection({ isActive }: SectionProps) {
         variants={containerVariants}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
-        className="relative z-10 flex h-full flex-col items-center justify-center px-[5vw] pb-[25dvh] text-center text-[#593520]"
+        className="relative z-10 flex h-full flex-col items-center justify-center px-[5vw] pb-[20dvh] text-center text-[#593520]"
       >
         <motion.div variants={itemVariants} className="mb-[4dvh]">
           <Image
