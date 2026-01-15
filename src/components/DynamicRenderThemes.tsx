@@ -3,22 +3,22 @@
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-const VintageJawaPage = dynamic(() => import("@/themes/dark/page"), {
+const WNPage = dynamic(() => import("@/themes/wn/page"), {
   ssr: false,
   loading: () => <div className="min-h-screen w-full bg-white"></div>,
 });
 
-function ThemeContent() {
+function UserContent() {
   const searchParams = useSearchParams();
-  const theme = searchParams.get("theme");
+  const user = searchParams.get("user");
 
-  return <>{theme === "dark" && <VintageJawaPage />}</>;
+  return <>{user === "wn" && <WNPage />}</>;
 }
 
 export default function DynamicRenderThemes() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-white"></div>}>
-      <ThemeContent />
+      <UserContent />
     </Suspense>
   );
 }
