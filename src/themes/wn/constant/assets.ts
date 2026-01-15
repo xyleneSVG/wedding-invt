@@ -5,6 +5,8 @@ import Bunga from "@/themes/wn/assets/img/bunga.png";
 import BackgroundDate from "@/themes/wn/assets/img/date.png";
 import Devider from "@/themes/wn/assets/img/devider.png";
 import BackgroundLocation from "@/themes/wn/assets/img/closing.jpg";
+import BCA from "@/themes/wn/assets/img/bca.png";
+import MANDIRI from "@/themes/wn/assets/img/mandiri.png";
 
 export const ASSETS = {
   Cover,
@@ -14,5 +16,7 @@ export const ASSETS = {
   Bunga,
   BackgroundDate,
   Devider,
-  BackgroundLocation
+  BackgroundLocation,
+  BCA,
+  MANDIRI
 };

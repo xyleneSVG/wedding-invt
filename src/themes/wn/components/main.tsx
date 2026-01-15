@@ -9,6 +9,7 @@ import DetailSection from "./section/detail";
 import DateSection from "./section/date";
 import LocationSection from "./section/location";
 import StorySection from "./section/story";
+import GiftSection from "./section/gift";
 
 export default function MainPage() {
   const [activeSection, setActiveSection] = useState(0);
@@ -16,7 +17,7 @@ export default function MainPage() {
   const touchStart = useRef(0);
 
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const SECTIONS = 6;
+  const SECTIONS = 7;
 
   const canScrollInternal = useCallback(
     (direction: "UP" | "DOWN"): boolean => {
@@ -163,6 +164,12 @@ export default function MainPage() {
           isActive={activeSection === 5}
           sectionRef={(el) => {
             sectionRefs.current[5] = el;
+          }}
+        />
+        <GiftSection
+          isActive={activeSection === 6}
+          sectionRef={(el) => {
+            sectionRefs.current[6] = el;
           }}
         />
       </motion.div>
