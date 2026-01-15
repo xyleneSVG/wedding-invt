@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -19,39 +18,41 @@ export default function MainPage() {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const SECTIONS = 6;
 
-  const canScrollInternal = (direction: "UP" | "DOWN"): boolean => {
-    const currentEl = sectionRefs.current[activeSection];
-    if (!currentEl) return false;
+  const canScrollInternal = useCallback(
+    (direction: "UP" | "DOWN"): boolean => {
+      const currentEl = sectionRefs.current[activeSection];
+      if (!currentEl) return false;
 
-    const isScrollable = currentEl.scrollHeight > currentEl.clientHeight;
+      const isScrollable = currentEl.scrollHeight > currentEl.clientHeight;
+      if (!isScrollable) return false;
 
-    if (!isScrollable) return false;
+      const { scrollTop, scrollHeight, clientHeight } = currentEl;
 
-    const { scrollTop, scrollHeight, clientHeight } = currentEl;
+      const isAtTop = scrollTop <= 0;
+      const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) <= 1;
 
-    const isAtTop = scrollTop <= 1;
-    const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) <= 1;
-
-    if (direction === "DOWN") {
-      return !isAtBottom;
-    } else {
-      return !isAtTop;
-    }
-  };
+      if (direction === "DOWN") {
+        return !isAtBottom;
+      } else {
+        return !isAtTop;
+      }
+    },
+    [activeSection],
+  );
 
   const handleSnap = useCallback(
     (direction: "UP" | "DOWN") => {
       if (isScrolling.current) return;
 
       if (direction === "DOWN" && activeSection < SECTIONS - 1) {
-        setActiveSection((prev) => prev + 1);
         isScrolling.current = true;
+        setActiveSection((prev) => prev + 1);
         setTimeout(() => {
           isScrolling.current = false;
         }, 1000);
       } else if (direction === "UP" && activeSection > 0) {
-        setActiveSection((prev) => prev - 1);
         isScrolling.current = true;
+        setActiveSection((prev) => prev - 1);
         setTimeout(() => {
           isScrolling.current = false;
         }, 1000);
@@ -62,12 +63,18 @@ export default function MainPage() {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      if (isScrolling.current) {
+        e.preventDefault();
+        return;
+      }
+
       const direction = e.deltaY > 0 ? "DOWN" : "UP";
 
       if (canScrollInternal(direction)) {
         return;
       }
 
+      e.preventDefault();
       if (Math.abs(e.deltaY) > 20) {
         handleSnap(direction);
       }
@@ -75,6 +82,20 @@ export default function MainPage() {
 
     const handleTouchStart = (e: TouchEvent) => {
       touchStart.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touchCurrent = e.touches[0].clientY;
+      const diff = touchStart.current - touchCurrent;
+      const direction = diff > 0 ? "DOWN" : "UP";
+
+      if (activeSection === 0 && direction === "UP") {
+        e.preventDefault();
+      }
+
+      if (isScrolling.current) {
+        e.preventDefault();
+      }
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
@@ -92,17 +113,19 @@ export default function MainPage() {
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: false });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false }); 
     window.addEventListener("touchend", handleTouchEnd, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [handleSnap, activeSection, canScrollInternal]);
 
   return (
-    <div className="fixed inset-0 h-dvh w-full overflow-hidden bg-black text-white">
+    <div className="fixed inset-0 h-dvh w-full touch-pan-y overflow-hidden overscroll-none bg-black text-white">
       <motion.div
         animate={{ y: `-${activeSection * 100}%` }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
