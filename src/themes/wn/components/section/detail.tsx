@@ -31,7 +31,7 @@ export default function SaveTheDateSection({
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat pt-20"
+      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[10dvh]"
       style={{
         backgroundImage: `url('${getCoverUrl()}')`,
       }}

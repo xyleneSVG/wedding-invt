@@ -65,7 +65,7 @@ export default function HeroSection({ isActive }: SectionProps) {
         variants={containerVariants}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
-        className="relative z-10 flex h-full flex-col items-center justify-center px-[5vw] pb-[10dvh] text-center"
+        className="relative z-10 flex h-full flex-col items-center justify-center px-[5vw] pb-[25dvh] text-center text-[#593520]"
       >
         <motion.div variants={itemVariants} className="mb-[4dvh]">
           <Image
@@ -73,7 +73,7 @@ export default function HeroSection({ isActive }: SectionProps) {
             alt="Wayang"
             width={636}
             height={1024}
-            className="h-auto w-[25vw] drop-shadow-2xl"
+            className="h-auto w-[55vw] drop-shadow-2xl"
             priority
           />
         </motion.div>
