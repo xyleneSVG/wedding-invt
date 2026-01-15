@@ -11,10 +11,7 @@ interface SectionProps {
   sectionRef?: (el: HTMLDivElement | null) => void;
 }
 
-export default function SaveTheDateSection({
-  isActive,
-  sectionRef,
-}: SectionProps) {
+export default function DetailSection({ isActive, sectionRef }: SectionProps) {
   const getCoverUrl = () => {
     if (!ASSETS?.Cover) return "";
     return typeof ASSETS.Cover === "string" ? ASSETS.Cover : ASSETS.Cover.src;
@@ -61,12 +58,12 @@ export default function SaveTheDateSection({
             Widia
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[7vw] font-medium`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[5vw] font-medium uppercase`}
           >
-            Tiara Terang Bintang
+            widia lailatul annisa
           </p>
           <p className="mb-[2dvh] w-[60vw] text-center text-[3.5vw]">
-            Putri dari Bapak Thomas Laksono & Ibu Rachma Aurora
+            Putri pertama dari Bapak Arkok Slamet Widodo dan Ibu Mundriyanah
           </p>
           <Link
             href={""}
@@ -84,12 +81,12 @@ export default function SaveTheDateSection({
             Nova
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[7vw] font-medium`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[5vw] font-medium uppercase`}
           >
-            Tiara Terang Bintang
+            nova azzainurrahman fauzi
           </p>
           <p className="mb-[2dvh] w-[60vw] text-center text-[3.5vw]">
-            Putri dari Bapak Thomas Laksono & Ibu Rachma Aurora
+            Putra pertama dari Bapak Achmad Isman dan Ibu Sri Rahayuni
           </p>
           <Link
             href={""}

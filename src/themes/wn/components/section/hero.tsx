@@ -102,7 +102,7 @@ export default function HeroSection({ isActive }: SectionProps) {
             FONT.cinzel?.className || ""
           } text-[4vw] font-medium tracking-[1vw]`}
         >
-          11 . 06 . 2026
+          14 . 06 . 2026
         </motion.p>
       </motion.div>
     </section>

@@ -6,7 +6,10 @@ import { motion } from "framer-motion";
 
 import HeroSection from "./section/hero";
 import QuoteSection from "./section/quote";
-import SaveTheDateSection from "./section/detail";
+import DetailSection from "./section/detail";
+import DateSection from "./section/date";
+import LocationSection from "./section/location";
+import StorySection from "./section/story";
 
 export default function MainPage() {
   const [activeSection, setActiveSection] = useState(0);
@@ -14,7 +17,7 @@ export default function MainPage() {
   const touchStart = useRef(0);
 
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const SECTIONS = 3;
+  const SECTIONS = 6;
 
   const canScrollInternal = (direction: "UP" | "DOWN"): boolean => {
     const currentEl = sectionRefs.current[activeSection];
@@ -109,10 +112,23 @@ export default function MainPage() {
 
         <QuoteSection isActive={activeSection === 1} />
 
-        <SaveTheDateSection
+        <DetailSection
           isActive={activeSection === 2}
           sectionRef={(el) => {
             sectionRefs.current[2] = el;
+          }}
+        />
+        <DateSection isActive={activeSection === 3} />
+        <LocationSection
+          isActive={activeSection === 4}
+          sectionRef={(el) => {
+            sectionRefs.current[4] = el;
+          }}
+        />
+        <StorySection
+          isActive={activeSection === 5}
+          sectionRef={(el) => {
+            sectionRefs.current[5] = el;
           }}
         />
       </motion.div>
