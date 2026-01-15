@@ -40,11 +40,11 @@ export default function SaveTheDateSection({
         variants={containerVariants}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[4vw] py-[6dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[4vw] py-[15dvh] text-[#593520]`}
       >
         <div>
           <p
-            className={`${FONT.imperialScript.className} mb-[2dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.imperialScript.className} mb-[6dvh] text-center text-[20vw] leading-[8dvh]`}
           >
             Bride &<br /> Groom
           </p>
