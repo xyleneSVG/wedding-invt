@@ -2,7 +2,6 @@
 
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
-import { motion, Variants } from "framer-motion";
 import { Instagram } from "lucide-react";
 import Link from "next/link";
 
@@ -11,18 +10,10 @@ interface SectionProps {
   sectionRef?: (el: HTMLDivElement | null) => void;
 }
 
-export default function DetailSection({ isActive, sectionRef }: SectionProps) {
+export default function DetailSection({ sectionRef }: SectionProps) {
   const getCoverUrl = () => {
     if (!ASSETS?.Cover) return "";
     return typeof ASSETS.Cover === "string" ? ASSETS.Cover : ASSETS.Cover.src;
-  };
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.4, delayChildren: 0.3 },
-    },
   };
 
   return (
@@ -33,10 +24,7 @@ export default function DetailSection({ isActive, sectionRef }: SectionProps) {
         backgroundImage: `url('${getCoverUrl()}')`,
       }}
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
+      <div
         className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[4vw] py-[15dvh] text-[#593520]`}
       >
         <div>
@@ -96,7 +84,7 @@ export default function DetailSection({ isActive, sectionRef }: SectionProps) {
             INSTAGRAM
           </Link>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

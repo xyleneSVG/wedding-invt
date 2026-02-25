@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
-import { motion, Variants } from "framer-motion";
 import { Copy, Check } from "lucide-react";
 import Image from "next/image";
 
@@ -12,7 +11,7 @@ interface SectionProps {
   sectionRef?: (el: HTMLDivElement | null) => void;
 }
 
-export default function GiftSection({ isActive, sectionRef }: SectionProps) {
+export default function GiftSection({ sectionRef }: SectionProps) {
   const [isCopied, setIsCopied] = useState(false);
   const [isCopied2, setIsCopied2] = useState(false);
   const [isCopiedAlamat, setIsCopiedAlamat] = useState(false);
@@ -62,14 +61,6 @@ export default function GiftSection({ isActive, sectionRef }: SectionProps) {
       : ASSETS?.BackgroundDate.src;
   };
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.4, delayChildren: 0.3 },
-    },
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -78,10 +69,7 @@ export default function GiftSection({ isActive, sectionRef }: SectionProps) {
         backgroundImage: `url('${getBackgroundUrl()}')`,
       }}
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
+      <div
         className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-[10vw] border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[6vw] py-[5dvh] text-[#593520]`}
       >
         <div>
@@ -230,7 +218,7 @@ export default function GiftSection({ isActive, sectionRef }: SectionProps) {
             className="mt-[8dvh] h-auto w-screen"
           ></Image>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

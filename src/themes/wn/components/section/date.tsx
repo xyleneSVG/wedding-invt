@@ -42,14 +42,6 @@ export default function DateSection({ isActive }: SectionProps) {
     return () => clearInterval(interval);
   }, []);
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
-    },
-  };
-
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: "5dvh" },
     visible: {
@@ -66,13 +58,10 @@ export default function DateSection({ isActive }: SectionProps) {
         backgroundImage: `url('${ASSETS.BackgroundDate.src}')`,
       }}
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
-        className="relative z-10 flex h-full w-full flex-col items-center justify-center bg-[#faf3e9b0] text-[#593520]"
-      >
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center bg-[#faf3e9b0] text-[#593520]">
         <motion.div
+          initial="hidden"
+          animate={isActive ? "visible" : "hidden"}
           variants={itemVariants}
           className="flex flex-col items-center"
         >
@@ -92,9 +81,7 @@ export default function DateSection({ isActive }: SectionProps) {
           >
             June
           </h3>
-          <h3
-            className={`${FONT.cinzel.className} text-[14vw] leading-tight`}
-          >
+          <h3 className={`${FONT.cinzel.className} text-[14vw] leading-tight`}>
             2026
           </h3>
           <Image
@@ -102,7 +89,7 @@ export default function DateSection({ isActive }: SectionProps) {
             alt={""}
             width={1920}
             height={720}
-            className="h-auto w-screen mb-[4dvh]"
+            className="mb-[4dvh] h-auto w-screen"
           ></Image>
         </motion.div>
         <motion.div
@@ -114,7 +101,7 @@ export default function DateSection({ isActive }: SectionProps) {
           <CountdownItem value={timeLeft.minutes} label="Minutes" />
           <CountdownItem value={timeLeft.seconds} label="Seconds" />
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

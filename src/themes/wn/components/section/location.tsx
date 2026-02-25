@@ -2,7 +2,6 @@
 
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
-import { motion, Variants } from "framer-motion";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +12,7 @@ interface SectionProps {
 }
 
 export default function LocationSection({
-  isActive,
+  
   sectionRef,
 }: SectionProps) {
   const getBackgroundUrl = () => {
@@ -21,14 +20,6 @@ export default function LocationSection({
     return typeof ASSETS?.BackgroundLocation === "string"
       ? ASSETS?.BackgroundLocation
       : ASSETS?.BackgroundLocation.src;
-  };
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.4, delayChildren: 0.3 },
-    },
   };
 
   return (
@@ -39,11 +30,9 @@ export default function LocationSection({
         backgroundImage: `url('${getBackgroundUrl()}')`,
       }}
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[6vw] py-[15dvh] text-[#593520]`}
+      <div
+      className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[6vw] py-[15dvh] text-[#593520]`}
+        
       >
         <div>
           <p
@@ -130,7 +119,7 @@ export default function LocationSection({
             className="mt-[8dvh] h-auto w-screen"
           ></Image>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
