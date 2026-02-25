@@ -13,14 +13,27 @@ import GiftSection from "./section/gift";
 
 export default function MainPage() {
   const [activeSection, setActiveSection] = useState(0);
+  const [vh, setVh] = useState(0);
+
   const isScrolling = useRef(false);
   const touchStart = useRef(0);
-
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const SECTIONS = 7;
 
+  useEffect(() => {
+    const setRealVH = () => {
+      setVh(window.innerHeight);
+    };
+
+    setRealVH();
+    window.addEventListener("resize", setRealVH);
+
+    return () => window.removeEventListener("resize", setRealVH);
+  }, []);
+
   const canScrollInternal = useCallback(
-    (direction: "UP" | "DOWN"): boolean => {
+    (direction: "UP" | "DOWN") => {
       const currentEl = sectionRefs.current[activeSection];
       if (!currentEl) return false;
 
@@ -32,11 +45,8 @@ export default function MainPage() {
       const isAtTop = scrollTop <= 0;
       const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) <= 1;
 
-      if (direction === "DOWN") {
-        return !isAtBottom;
-      } else {
-        return !isAtTop;
-      }
+      if (direction === "DOWN") return !isAtBottom;
+      return !isAtTop;
     },
     [activeSection],
   );
@@ -48,40 +58,22 @@ export default function MainPage() {
       if (direction === "DOWN" && activeSection < SECTIONS - 1) {
         isScrolling.current = true;
         setActiveSection((prev) => prev + 1);
-        setTimeout(() => {
-          isScrolling.current = false;
-        }, 1000);
-      } else if (direction === "UP" && activeSection > 0) {
+      }
+
+      if (direction === "UP" && activeSection > 0) {
         isScrolling.current = true;
         setActiveSection((prev) => prev - 1);
-        setTimeout(() => {
-          isScrolling.current = false;
-        }, 1000);
       }
+
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 900);
     },
-    [activeSection, SECTIONS],
+    [activeSection],
   );
 
   useEffect(() => {
-    document.body.style.overscrollBehavior = "none";
-    document.documentElement.style.overscrollBehavior = "none";
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overscrollBehavior = "";
-      document.documentElement.style.overscrollBehavior = "";
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    };
-  }, []);
-
-  useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (isScrolling.current) {
-        e.preventDefault();
-        return;
-      }
       const direction = e.deltaY > 0 ? "DOWN" : "UP";
 
       if (canScrollInternal(direction)) return;
@@ -96,81 +88,60 @@ export default function MainPage() {
       touchStart.current = e.touches[0].clientY;
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      const touchCurrent = e.touches[0].clientY;
-      const diff = touchStart.current - touchCurrent;
-      const direction = diff > 0 ? "DOWN" : "UP";
-      if (direction === "UP" && activeSection === 0) {
-        const currentEl = sectionRefs.current[0];
-        const isAtTop = currentEl ? currentEl.scrollTop <= 0 : true;
-
-        if (isAtTop) {
-          e.preventDefault();
-        }
-      }
-      if (isScrolling.current) {
-        e.preventDefault();
-      }
-    };
-
     const handleTouchEnd = (e: TouchEvent) => {
       const touchEnd = e.changedTouches[0].clientY;
       const diff = touchStart.current - touchEnd;
       const direction = diff > 0 ? "DOWN" : "UP";
+
       if (Math.abs(diff) > 50) {
-        if (canScrollInternal(direction)) {
-          return;
+        if (!canScrollInternal(direction)) {
+          handleSnap(direction);
         }
-        handleSnap(direction);
       }
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: false });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [handleSnap, activeSection, canScrollInternal]);
+  }, [handleSnap, canScrollInternal]);
 
   return (
-    <div className="fixed inset-0 h-dvh w-full overflow-hidden bg-black text-white">
+    <div
+      className="fixed inset-0 w-full overflow-hidden bg-black text-white"
+      style={{
+        height: vh,
+        overscrollBehavior: "none",
+      }}
+    >
       <motion.div
-        animate={{ y: `-${activeSection * 100}%` }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="h-full w-full"
+        animate={{ y: -activeSection * vh }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        style={{ height: vh * SECTIONS }}
       >
         <HeroSection isActive={activeSection === 0} />
         <QuoteSection isActive={activeSection === 1} />
         <DetailSection
           isActive={activeSection === 2}
-          sectionRef={(el) => {
-            sectionRefs.current[2] = el;
-          }}
+          sectionRef={(el) => (sectionRefs.current[2] = el)}
         />
         <DateSection isActive={activeSection === 3} />
         <LocationSection
           isActive={activeSection === 4}
-          sectionRef={(el) => {
-            sectionRefs.current[4] = el;
-          }}
+          sectionRef={(el) => (sectionRefs.current[4] = el)}
         />
         <StorySection
           isActive={activeSection === 5}
-          sectionRef={(el) => {
-            sectionRefs.current[5] = el;
-          }}
+          sectionRef={(el) => (sectionRefs.current[5] = el)}
         />
         <GiftSection
           isActive={activeSection === 6}
-          sectionRef={(el) => {
-            sectionRefs.current[6] = el;
-          }}
+          sectionRef={(el) => (sectionRefs.current[6] = el)}
         />
       </motion.div>
     </div>
