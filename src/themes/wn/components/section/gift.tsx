@@ -70,7 +70,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
       }}
     >
       <div
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-[10vw] border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[6vw] py-[5dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-[10vw] border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[5dvh] text-[#593520]`}
       >
         <div>
           <p
@@ -78,7 +78,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
           >
             Wedding Gift
           </p>
-          <p className="text-center text-[3.5vw]">
+          <p className="text-center text-[3vw]">
             Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan
             jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi
             kado secara cashless.

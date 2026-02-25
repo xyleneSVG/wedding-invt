@@ -44,21 +44,21 @@ export default function QuoteSection({ isActive }: SectionProps) {
         variants={containerVariants}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
-        className={`${FONT.openSans.className} flex h-[60dvh] w-[90vw] flex-col items-center justify-center rounded-[4vw] bg-[#faf3e9b0] px-[6vw] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-[60dvh] w-[90vw] flex-col items-center justify-center rounded-[4vw] bg-[#faf3e9b0] px-[10vw] text-[#593520]`}
       >
         <motion.p
           className={`${FONT.vidaloka.className} mb-[2dvh] text-[7vw] font-medium`}
         >
           WE FOUND LOVE
         </motion.p>
-        <motion.p className="mb-[2dvh] text-center text-[3.5vw]">
+        <motion.p className="mb-[2dvh] text-center text-[3vw]">
           “Dan diantara tanda-tanda kekuasaanNya ialah Dia menciptakan untukmu
           isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa
           tenteram kepadanya, dan dijadikanNya diantaramu rasa kasih dan sayang.
           Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda
           bagi kaum yang berpikir.”
         </motion.p>
-        <motion.p className="text-[3.5vw]">(Qs. Ar. Rum (30) : 21)</motion.p>
+        <motion.p className="text-[3vw]">(Qs. Ar. Rum (30) : 21)</motion.p>
       </motion.div>
     </section>
   );

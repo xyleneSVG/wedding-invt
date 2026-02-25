@@ -25,7 +25,7 @@ export default function StorySection({ sectionRef }: SectionProps) {
       }}
     >
       <div
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[4vw] py-[15dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
       >
         <div>
           <p
@@ -41,40 +41,40 @@ export default function StorySection({ sectionRef }: SectionProps) {
         </div>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[8vw] uppercase`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[6vw] uppercase`}
           >
             Awal kisah
           </p>
-          <p className="mb-[6dvh] text-center text-[3.5vw]">
+          <p className="mb-[6dvh] text-center text-[3vw]">
             terlalu panjang jika diceritakan dari permulaan, pada intinya kita
             hanya sepasang yang ditakdirkan dan berhasil melewati badai maupun
             pelangi sampai di titik ini..
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[8vw] uppercase`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[6vw] uppercase`}
           >
             Saling Mendewasakan
           </p>
-          <p className="mb-[6dvh] text-center text-[3.5vw]">
+          <p className="mb-[6dvh] text-center text-[3vw]">
             ribuan tangis dan jutaan tawa menjadi saksi bagaimana kata “yakin”
             terus mengucap untuk mengokohkan hati yang kerdil..
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[8vw] uppercase`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[6vw] uppercase`}
           >
             Janji setia
           </p>
-          <p className="mb-[6dvh] text-center text-[3.5vw]">
+          <p className="mb-[6dvh] text-center text-[3vw]">
             bukan hanya kata kata yang tak menjelma aksi, segala pengorbanan
             telah menjadi reaksi hingga pada “21 november 2025” kita
             mempertemukan dua keluarga kami.
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[8vw] uppercase`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[6vw] uppercase`}
           >
             Awal Selamanya
           </p>
-          <p className="text-center text-[3.5vw]">
+          <p className="text-center text-[3vw]">
             tidak semudah atau setenang yang terlihat, sejatinya kita hanya
             berharap dan memasrahkan diri kepada sang Maha Cinta dan berdoa agar
             senantiasa dimudahkan jalannya. hingga terbitlah hari dimana kami

@@ -25,7 +25,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
       }}
     >
       <div
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[4vw] py-[15dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
       >
         <div>
           <p
@@ -33,7 +33,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
           >
             Bride &<br /> Groom
           </p>
-          <p className="text-center text-[3.5vw]">
+          <p className="text-center text-[3vw]">
             Assalamualaikum Wr. Wb. <br /> Dengan memohon Rahmat & Ridho Allah
             SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri
             acara pernikahan putra-putri kami:
@@ -41,21 +41,21 @@ export default function DetailSection({ sectionRef }: SectionProps) {
         </div>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.imperialScript.className} mb-[4dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.imperialScript.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
           >
             Widia
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[5vw] font-medium uppercase`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[4vw] font-medium uppercase`}
           >
             widia lailatul annisa
           </p>
-          <p className="mb-[2dvh] w-[60vw] text-center text-[3.5vw]">
+          <p className="mb-[2dvh] w-[60vw] text-center text-[3vw]">
             Putri pertama dari Bapak Arkok Slamet Widodo dan Ibu Mundriyanah
           </p>
           <Link
             href={""}
-            className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white"
+            className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white"
           >
             <Instagram className="size-[4vw]" />
             INSTAGRAM
@@ -64,21 +64,21 @@ export default function DetailSection({ sectionRef }: SectionProps) {
         <p className={`${FONT.cormorantInfant.className} text-[22vw]`}>&</p>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.imperialScript.className} mb-[4dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.imperialScript.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
           >
             Nova
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[5vw] font-medium uppercase`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[4vw] font-medium uppercase`}
           >
             nova azzainurrahman fauzi
           </p>
-          <p className="mb-[2dvh] w-[60vw] text-center text-[3.5vw]">
+          <p className="mb-[2dvh] w-[60vw] text-center text-[3vw]">
             Putra pertama dari Bapak Achmad Isman dan Ibu Sri Rahayuni
           </p>
           <Link
             href={""}
-            className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white"
+            className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white"
           >
             <Instagram className="size-[4vw]" />
             INSTAGRAM

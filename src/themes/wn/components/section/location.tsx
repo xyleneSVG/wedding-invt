@@ -31,7 +31,7 @@ export default function LocationSection({
       }}
     >
       <div
-      className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[6vw] py-[15dvh] text-[#593520]`}
+      className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
         
       >
         <div>
@@ -41,7 +41,7 @@ export default function LocationSection({
             Wedding
             <br /> Event
           </p>
-          <p className="text-center text-[3.5vw]">
+          <p className="text-center text-[3vw]">
             Dengan memohon rahmat dan ridho Allah SWT, kami mengundang
             Bapak/Ibu/Saudara/i, untuk menghadiri acara pernikahan kami:
           </p>
@@ -64,11 +64,11 @@ export default function LocationSection({
           >
             MINGGU | 14 . 06 . 2026
           </p>
-          <p className="mb-[4dvh] w-[60vw] text-center text-[4.5vw]">
+          <p className="mb-[4dvh] w-[60vw] text-center text-[4vw]">
             Pukul menyusul WIB
           </p>
           <MapPin className="mb-[2dvh] size-[10vw]" />
-          <p className="mb-[4dvh] w-[60vw] text-center text-[3.5vw]">
+          <p className="mb-[4dvh] w-[60vw] text-center text-[3vw]">
             Bertempat di: mempelai wanita <br /> Jalan pekunden barat no 854 rt
             2 rw 1 kelurahan pekunden kecamatan semarang tengah
           </p>
@@ -96,17 +96,17 @@ export default function LocationSection({
           >
             MINGGU | 14 . 06 . 2026
           </p>
-          <p className="mb-[4dvh] w-[60vw] text-center text-[4.5vw]">
+          <p className="mb-[4dvh] w-[60vw] text-center text-[4vw]">
             Pukul menyusul WIB
           </p>
           <MapPin className="mb-[2dvh] size-[10vw]" />
-          <p className="mb-[4dvh] w-[60vw] text-center text-[3.5vw]">
+          <p className="mb-[4dvh] w-[60vw] text-center text-[3vw]">
             Bertempat di: mempelai wanita <br /> Jalan pekunden barat no 854 rt
             2 rw 1 kelurahan pekunden kecamatan semarang tengah
           </p>
           <Link
             href={""}
-            className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white"
+            className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white"
           >
             <MapPin className="size-[4vw]" />
             OPEN MAPS
