@@ -53,12 +53,11 @@ export default function Page() {
           <video
             ref={introVideoRef}
             autoPlay
-            muted={false}
+            muted
             playsInline
             preload="auto"
             className="h-full w-full object-cover"
             onTimeUpdate={handleTimeUpdate}
-            style={{ transform: "translateZ(0)" }}
           >
             <source src={ASSETS.Motion} type="video/mp4" />
           </video>
