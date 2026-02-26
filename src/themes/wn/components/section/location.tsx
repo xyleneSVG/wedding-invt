@@ -54,7 +54,7 @@ export default function LocationSection({
             className="mb-[4dvh] h-auto w-screen"
           ></Image>
           <p
-            className={`${FONT.vidaloka.className} text-center text-[10vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[8vw] leading-[8dvh]`}
           >
             Akad Nikah
           </p>
@@ -68,7 +68,7 @@ export default function LocationSection({
           </p>
           <MapPin className="mb-[2dvh] size-[10vw]" />
           <p className="mb-[4dvh] w-[60vw] text-center text-[3vw]">
-            Bertempat di: mempelai wanita <br /> Jalan pekunden barat no 854 rt
+            Bertempat di mempelai wanita <br /> Jalan pekunden barat no 854 rt
             2 rw 1 kelurahan pekunden kecamatan semarang tengah
           </p>
           <Link
@@ -86,7 +86,7 @@ export default function LocationSection({
             className="mt-[4dvh] mb-[4dvh] h-auto w-screen"
           ></Image>
           <p
-            className={`${FONT.vidaloka.className} text-center text-[10vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[8vw] leading-[8dvh]`}
           >
             Resepsi
           </p>
@@ -100,7 +100,7 @@ export default function LocationSection({
           </p>
           <MapPin className="mb-[2dvh] size-[10vw]" />
           <p className="mb-[4dvh] w-[60vw] text-center text-[3vw]">
-            Bertempat di: mempelai wanita <br /> Jalan pekunden barat no 854 rt
+            Bertempat di mempelai wanita <br /> Jalan pekunden barat no 854 rt
             2 rw 1 kelurahan pekunden kecamatan semarang tengah
           </p>
           <Link
