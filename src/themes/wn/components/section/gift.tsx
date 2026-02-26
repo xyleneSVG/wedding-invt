@@ -50,7 +50,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[10dvh]"
+      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto overscroll-y-contain bg-cover bg-center bg-no-repeat py-[10dvh]"
       style={{
         backgroundImage: `url('${getBackgroundUrl()}')`,
       }}

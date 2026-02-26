@@ -7,6 +7,7 @@ import Devider from "@/themes/wn/assets/img/devider.png";
 import BackgroundLocation from "@/themes/wn/assets/img/closing.jpg";
 import BCA from "@/themes/wn/assets/img/bca.png";
 import MANDIRI from "@/themes/wn/assets/img/mandiri.png";
+import BackgroundWish from "@/themes/wn/assets/img/wish.png";
 
 export const ASSETS = {
   Cover,
@@ -18,5 +19,6 @@ export const ASSETS = {
   Devider,
   BackgroundLocation,
   BCA,
-  MANDIRI
+  MANDIRI,
+  BackgroundWish,
 };

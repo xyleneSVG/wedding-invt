@@ -10,6 +10,8 @@ import DateSection from "./section/date";
 import LocationSection from "./section/location";
 import StorySection from "./section/story";
 import GiftSection from "./section/gift";
+import WishSection from "./section/wish";
+import AASection from "./section/aa";
 
 export default function MainPage() {
   const [activeSection, setActiveSection] = useState(0);
@@ -19,7 +21,7 @@ export default function MainPage() {
   const touchStart = useRef(0);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const SECTIONS = 7;
+  const SECTIONS = 9;
 
   useEffect(() => {
     const setRealVH = () => {
@@ -142,6 +144,14 @@ export default function MainPage() {
         <GiftSection
           isActive={activeSection === 6}
           sectionRef={(el) => (sectionRefs.current[6] = el)}
+        />
+        <WishSection
+          isActive={activeSection === 7}
+          sectionRef={(el) => (sectionRefs.current[7] = el)}
+        />
+        <AASection
+          isActive={activeSection === 8}
+          sectionRef={(el) => (sectionRefs.current[8] = el)}
         />
       </motion.div>
     </div>
