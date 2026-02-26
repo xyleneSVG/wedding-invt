@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
 import Image from "next/image";
+
+const SCRIPT_URL = process.env.NEXT_PUBLIC_GSHEET_URL!
 
 interface SectionProps {
   isActive: boolean;
@@ -34,11 +38,41 @@ export default function WishSection({ sectionRef }: SectionProps) {
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyName, setReplyName] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
+  
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [, setTick] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => setTick((t) => t + 1), 60000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchWishes = async () => {
+      try {
+        const response = await fetch(SCRIPT_URL);
+        const result = await response.json();
+        
+        if (result.status === "success") {
+          const formattedData = result.data.map((wish: any) => ({
+            ...wish,
+            createdAt: new Date(wish.createdAt),
+            replies: wish.replies.map((reply: any) => ({
+              ...reply,
+              createdAt: new Date(reply.createdAt)
+            }))
+          }));
+          setWishes(formattedData);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data ucapan", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWishes();
   }, []);
 
   const getBackgroundUrl = () => {
@@ -67,48 +101,91 @@ export default function WishSection({ sectionRef }: SectionProps) {
     return `${diffInYears} tahun lalu`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !message) return;
+    if (!name || !message || isSubmitting) return;
 
-    const newWish: Wish = {
-      id: Date.now().toString(),
-      name,
-      message,
-      createdAt: new Date(),
-      replies: [], 
-    };
+    setIsSubmitting(true);
     
-    setWishes([newWish, ...wishes]);
-    setName("");
-    setMessage("");
-    setPage(0);
+    const newWish = {
+      action: "add_wish", 
+      id: Date.now().toString(),
+      nama: name,
+      pesan: message,
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(newWish),
+      });
+
+      const localWish: Wish = {
+        id: newWish.id,
+        name: newWish.nama,
+        message: newWish.pesan,
+        createdAt: new Date(newWish.timestamp),
+        replies: [], 
+      };
+      
+      setWishes([localWish, ...wishes]);
+      setName("");
+      setMessage("");
+      setPage(0);
+    } catch (error) {
+      alert("Waduh, gagal ngirim ucapan! Coba lagi ya.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleReplySubmit = (e: React.FormEvent, wishId: string) => {
+  const handleReplySubmit = async (e: React.FormEvent, wishId: string) => {
     e.preventDefault();
-    if (!replyName || !replyMessage) return;
+    if (!replyName || !replyMessage || isSubmitting) return;
 
-    const newWishes = wishes.map((wish) => {
-      if (wish.id === wishId) {
-        const newReply: Reply = {
-          id: Date.now().toString(),
-          name: replyName,
-          message: replyMessage,
-          createdAt: new Date(),
-        };
-        return {
-          ...wish,
-          replies: [...wish.replies, newReply], 
-        };
-      }
-      return wish;
-    });
+    setIsSubmitting(true);
 
-    setWishes(newWishes);
-    setReplyingTo(null);
-    setReplyName("");
-    setReplyMessage("");
+    const newReply = {
+      action: "add_reply", 
+      id: Date.now().toString(),
+      ref_id: wishId,
+      nama: replyName,
+      pesan: replyMessage,
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(newReply),
+      });
+
+      const newWishes = wishes.map((wish) => {
+        if (wish.id === wishId) {
+          const localReply: Reply = {
+            id: newReply.id,
+            name: newReply.nama,
+            message: newReply.pesan,
+            createdAt: new Date(newReply.timestamp),
+          };
+          return {
+            ...wish,
+            replies: [...wish.replies, localReply], 
+          };
+        }
+        return wish;
+      });
+
+      setWishes(newWishes);
+      setReplyingTo(null);
+      setReplyName("");
+      setReplyMessage("");
+    } catch (error) {
+      alert("Gagal ngirim balasan!");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const itemsPerPage = 3;
@@ -133,7 +210,7 @@ export default function WishSection({ sectionRef }: SectionProps) {
       >
         <div className="flex flex-col items-center gap-y-[1vh] shrink-0">
           <p
-            className={`${FONT.vidaloka.className} text-center text-[8vw] drop-shadow-sm`}
+            className={`${FONT.vidaloka.className} text-center text-[12vw] drop-shadow-sm`}
           >
             Best Wishes
           </p>
@@ -142,27 +219,29 @@ export default function WishSection({ sectionRef }: SectionProps) {
           </p>
         </div>
 
-        {/* Form Utama */}
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-[2vh] shrink-0">
           <input
             type="text"
             placeholder="Nama"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white focus:ring-[0.5vw] focus:ring-[#593520]/10"
+            disabled={isSubmitting}
+            className="w-full rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white disabled:opacity-50"
           />
           <textarea
             placeholder="Tulis ucapan..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            disabled={isSubmitting}
             rows={3}
-            className="w-full resize-none rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white focus:ring-[0.5vw] focus:ring-[#593520]/10"
+            className="w-full resize-none rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white disabled:opacity-50"
           />
           <button
             type="submit"
-            className="mt-[1vh] w-full rounded-[3vw] bg-[#593520] px-[4vw] py-[1.5vh] text-[3.5vw] font-semibold tracking-wide text-white shadow-md transition-all duration-300 hover:bg-[#432717] hover:shadow-lg active:scale-[0.98]"
+            disabled={isSubmitting}
+            className="mt-[1vh] w-full rounded-[3vw] bg-[#593520] px-[4vw] py-[1.5vh] text-[3.5vw] font-semibold tracking-wide text-white shadow-md transition-all duration-300 hover:bg-[#432717] hover:shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Kirim Ucapan
+            {isSubmitting ? "Mengirim..." : "Kirim Ucapan"}
           </button>
         </form>
 
@@ -170,21 +249,21 @@ export default function WishSection({ sectionRef }: SectionProps) {
           <Image
             src={ASSETS.Devider.src}
             alt="Divider"
-            width={400} // Ini cuma untuk prop Next/Image, ukurannya tetap diatur class di bawah
+            width={400} 
             height={50}
             className="h-auto w-full opacity-70"
           />
         </div>
 
-        {/* List Ucapan */}
         <div className="flex w-full flex-col gap-y-[2.5vh] grow">
-          {visibleWishes.length > 0 ? (
+          {isLoading ? (
+            <p className="text-center text-[3.5vw] italic opacity-60 animate-pulse">Memuat ucapan...</p>
+          ) : visibleWishes.length > 0 ? (
             visibleWishes.map((wish) => (
               <div
                 key={wish.id}
                 className="group flex w-full flex-col rounded-[4vw] border-[0.2vw] border-[#593520]/10 bg-white p-[4vw] shadow-sm transition-all hover:shadow-md"
               >
-                {/* Header Ucapan */}
                 <div className="mb-[1vh] flex items-start justify-between">
                   <p className="text-[3.5vw] font-bold text-[#593520]">{wish.name}</p>
                   <div className="flex items-center gap-x-[1vw] text-[2.5vw] text-[#593520]/60">
@@ -200,7 +279,6 @@ export default function WishSection({ sectionRef }: SectionProps) {
                   {wish.message}
                 </p>
 
-                {/* Tombol Reply */}
                 {replyingTo !== wish.id && (
                   <button
                     onClick={() => setReplyingTo(wish.id)}
@@ -210,7 +288,6 @@ export default function WishSection({ sectionRef }: SectionProps) {
                   </button>
                 )}
 
-                {/* Form Reply */}
                 {replyingTo === wish.id && (
                   <form
                     onSubmit={(e) => handleReplySubmit(e, wish.id)}
@@ -221,14 +298,16 @@ export default function WishSection({ sectionRef }: SectionProps) {
                       placeholder="Nama kamu"
                       value={replyName}
                       onChange={(e) => setReplyName(e.target.value)}
-                      className="w-full rounded-[2vw] border-[0.2vw] border-[#593520]/30 bg-[#faf3e9]/50 px-[3vw] py-[1vh] text-[3vw] outline-none focus:border-[#593520] focus:bg-white"
+                      disabled={isSubmitting}
+                      className="w-full rounded-[2vw] border-[0.2vw] border-[#593520]/30 bg-[#faf3e9]/50 px-[3vw] py-[1vh] text-[3vw] outline-none focus:border-[#593520] focus:bg-white disabled:opacity-50"
                     />
                     <textarea
                       placeholder="Tulis balasan..."
                       value={replyMessage}
                       onChange={(e) => setReplyMessage(e.target.value)}
+                      disabled={isSubmitting}
                       rows={2}
-                      className="w-full resize-none rounded-[2vw] border-[0.2vw] border-[#593520]/30 bg-[#faf3e9]/50 px-[3vw] py-[1vh] text-[3vw] outline-none focus:border-[#593520] focus:bg-white"
+                      className="w-full resize-none rounded-[2vw] border-[0.2vw] border-[#593520]/30 bg-[#faf3e9]/50 px-[3vw] py-[1vh] text-[3vw] outline-none focus:border-[#593520] focus:bg-white disabled:opacity-50"
                     />
                     <div className="flex justify-end gap-x-[2vw]">
                       <button
@@ -238,21 +317,22 @@ export default function WishSection({ sectionRef }: SectionProps) {
                           setReplyName("");
                           setReplyMessage("");
                         }}
-                        className="rounded-[2vw] px-[3vw] py-[1vh] text-[3vw] font-medium text-[#593520]/70 hover:bg-[#593520]/5"
+                        disabled={isSubmitting}
+                        className="rounded-[2vw] px-[3vw] py-[1vh] text-[3vw] font-medium text-[#593520]/70 hover:bg-[#593520]/5 disabled:opacity-50"
                       >
                         Batal
                       </button>
                       <button
                         type="submit"
-                        className="rounded-[2vw] bg-[#593520] px-[3vw] py-[1vh] text-[3vw] font-medium text-white transition-all hover:bg-[#432717]"
+                        disabled={isSubmitting}
+                        className="rounded-[2vw] bg-[#593520] px-[3vw] py-[1vh] text-[3vw] font-medium text-white transition-all hover:bg-[#432717] disabled:opacity-50"
                       >
-                        Kirim
+                        {isSubmitting ? "..." : "Kirim"}
                       </button>
                     </div>
                   </form>
                 )}
 
-                {/* Tampilan List Balasan */}
                 {wish.replies && wish.replies.length > 0 && (
                   <div className="mt-[2vh] flex flex-col gap-y-[1.5vh] border-l-[0.5vw] border-[#593520]/20 pl-[3vw]">
                     {wish.replies.map((reply) => (
@@ -280,7 +360,6 @@ export default function WishSection({ sectionRef }: SectionProps) {
           )}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex w-full items-center justify-between px-[2vw] pt-[1vh] shrink-0">
             <button
