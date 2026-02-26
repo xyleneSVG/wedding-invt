@@ -72,7 +72,7 @@ export default function LocationSection({
             2 rw 1 kelurahan pekunden kecamatan semarang tengah
           </p>
           <Link
-            href={""}
+            href={"https://share.google/6ddoXUwOxmyp2wW2M"}
             className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white"
           >
             <MapPin className="size-[4vw]" />
@@ -104,7 +104,7 @@ export default function LocationSection({
             2 rw 1 kelurahan pekunden kecamatan semarang tengah
           </p>
           <Link
-            href={""}
+            href={"https://share.google/6ddoXUwOxmyp2wW2M"}
             className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white"
           >
             <MapPin className="size-[4vw]" />

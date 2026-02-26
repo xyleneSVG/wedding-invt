@@ -54,7 +54,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
             Putri pertama dari Bapak Arkok Slamet Widodo dan Ibu Mundriyanah
           </p>
           <Link
-            href={""}
+            href={"https://www.instagram.com/widianyss_?igsh=MTBkejB5dnloZXpuMw=="}
             className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white"
           >
             <Instagram className="size-[4vw]" />
@@ -77,7 +77,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
             Putra pertama dari Bapak Achmad Isman dan Ibu Sri Rahayuni
           </p>
           <Link
-            href={""}
+            href={"https://www.instagram.com/nvafzyy?igsh=MTgycGl3eWE5NngxMg=="}
             className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white"
           >
             <Instagram className="size-[4vw]" />
