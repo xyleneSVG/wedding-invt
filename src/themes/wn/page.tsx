@@ -3,15 +3,18 @@
 import { useState, useRef } from "react";
 import CoverPage from "./components/cover";
 import MainPage from "./components/main";
+import MusicPlayer from "./components/musicPlayer";
 import { ASSETS } from "./constant/assets";
 
 export default function Page() {
   const [stage, setStage] = useState<"COVER" | "INTRO" | "MAIN">("COVER");
   const [isWhite, setIsWhite] = useState(false);
+  const [startMusic, setStartMusic] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement>(null);
 
   const handleOpenCover = () => {
     setIsWhite(true);
+    setStartMusic(true);
     setTimeout(() => {
       setStage("INTRO");
       setTimeout(() => setIsWhite(false), 500);
@@ -41,7 +44,7 @@ export default function Page() {
   };
 
   return (
-    <div className="relative w-full bg-black">
+    <div className="relative w-full">
       {stage === "COVER" && (
         <div className="h-screen w-full overflow-hidden">
           <CoverPage onOpen={handleOpenCover} />
@@ -49,7 +52,7 @@ export default function Page() {
       )}
 
       {stage === "INTRO" && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <video
             ref={introVideoRef}
             autoPlay
@@ -78,6 +81,8 @@ export default function Page() {
           isWhite ? "opacity-100" : "opacity-0"
         }`}
       ></div>
+
+      <MusicPlayer shouldPlay={startMusic} />
     </div>
   );
 }

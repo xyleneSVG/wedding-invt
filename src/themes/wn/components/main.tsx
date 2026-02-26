@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-
 import HeroSection from "./section/hero";
 import QuoteSection from "./section/quote";
 import DetailSection from "./section/detail";
@@ -148,28 +147,50 @@ export default function MainPage() {
           isActive={activeSection === 6}
           sectionRef={(el) => (sectionRefs.current[6] = el)}
         />
-        <WishSection
-          isActive={activeSection === 7}
-        />
+        <WishSection isActive={activeSection === 7} />
       </motion.div>
 
-      <div className="fixed right-4 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-y-3">
+      <div className="fixed top-1/2 right-4 z-50 flex -translate-y-1/2 flex-col gap-y-3">
         <button
           onClick={() => setActiveSection((prev) => Math.max(0, prev - 1))}
           disabled={activeSection === 0}
           className="group flex h-10 w-10 items-center justify-center rounded-full bg-[#593520] shadow-lg backdrop-blur-md transition-all hover:bg-[#432717] active:scale-95 disabled:pointer-events-none disabled:opacity-0"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white transition-transform group-hover:-translate-y-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white transition-transform group-hover:-translate-y-1"
+          >
             <polyline points="18 15 12 9 6 15"></polyline>
           </svg>
         </button>
 
         <button
-          onClick={() => setActiveSection((prev) => Math.min(SECTIONS - 1, prev + 1))}
+          onClick={() =>
+            setActiveSection((prev) => Math.min(SECTIONS - 1, prev + 1))
+          }
           disabled={activeSection === SECTIONS - 1}
           className="group flex h-10 w-10 items-center justify-center rounded-full bg-[#593520] shadow-lg backdrop-blur-md transition-all hover:bg-[#432717] active:scale-95 disabled:pointer-events-none disabled:opacity-0"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white transition-transform group-hover:translate-y-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white transition-transform group-hover:translate-y-1"
+          >
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
