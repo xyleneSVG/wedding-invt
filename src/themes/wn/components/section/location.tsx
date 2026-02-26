@@ -54,7 +54,7 @@ export default function LocationSection({
             className="mb-[4dvh] h-auto w-screen"
           ></Image>
           <p
-            className={`${FONT.vidaloka.className} mb-[1dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[10vw] leading-[8dvh]`}
           >
             Akad Nikah
           </p>
@@ -86,7 +86,7 @@ export default function LocationSection({
             className="mt-[4dvh] mb-[4dvh] h-auto w-screen"
           ></Image>
           <p
-            className={`${FONT.vidaloka.className} mb-[1dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[10vw] leading-[8dvh]`}
           >
             Resepsi
           </p>

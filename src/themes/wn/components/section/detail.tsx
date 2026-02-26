@@ -41,7 +41,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
         </div>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.vidaloka.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[10vw] leading-[8dvh]`}
           >
             Widia
           </p>
@@ -64,7 +64,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
         <p className={`${FONT.cormorantInfant.className} text-[22vw]`}>&</p>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.vidaloka.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[10vw] leading-[8dvh]`}
           >
             Nova
           </p>
