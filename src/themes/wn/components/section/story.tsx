@@ -19,17 +19,17 @@ export default function StorySection({ sectionRef }: SectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[10dvh]"
+      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[8dvh]"
       style={{
         backgroundImage: `url('${getCoverUrl()}')`,
       }}
     >
       <div
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[8dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
       >
         <div>
           <p
-            className={`${FONT.imperialScript.className} mb-[2dvh] text-center text-[20vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[12vw] leading-[8dvh]`}
           >
             Love Story
           </p>

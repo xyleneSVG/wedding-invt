@@ -25,21 +25,20 @@ export default function LocationSection({
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[10dvh]"
+      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[6dvh]"
       style={{
         backgroundImage: `url('${getBackgroundUrl()}')`,
       }}
     >
       <div
-      className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
+      className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[4dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
         
       >
         <div>
           <p
-            className={`${FONT.imperialScript.className} mb-[4dvh] text-center text-[20vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[8vw] leading-[8dvh]`}
           >
-            Wedding
-            <br /> Event
+            Wedding Event
           </p>
           <p className="text-center text-[3vw]">
             Dengan memohon rahmat dan ridho Allah SWT, kami mengundang
@@ -52,10 +51,10 @@ export default function LocationSection({
             alt={""}
             width={1920}
             height={720}
-            className="mb-[8dvh] h-auto w-screen"
+            className="mb-[4dvh] h-auto w-screen"
           ></Image>
           <p
-            className={`${FONT.imperialScript.className} mb-[1dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} mb-[1dvh] text-center text-[14vw] leading-[8dvh]`}
           >
             Akad Nikah
           </p>
@@ -84,10 +83,10 @@ export default function LocationSection({
             alt={""}
             width={1920}
             height={720}
-            className="mt-[8dvh] mb-[8dvh] h-auto w-screen"
+            className="mt-[4dvh] mb-[4dvh] h-auto w-screen"
           ></Image>
           <p
-            className={`${FONT.imperialScript.className} mb-[1dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} mb-[1dvh] text-center text-[14vw] leading-[8dvh]`}
           >
             Resepsi
           </p>

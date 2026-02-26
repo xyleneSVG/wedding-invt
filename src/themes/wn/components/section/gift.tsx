@@ -56,11 +56,11 @@ export default function GiftSection({ sectionRef }: SectionProps) {
       }}
     >
       <div
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-[10vw] border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[5dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around rounded-[10vw] border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[5dvh] text-[#593520]`}
       >
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.imperialScript.className} mb-[2dvh] text-center text-[15vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-center text-[8vw] leading-[8dvh]`}
           >
             Wedding Gift
           </p>
@@ -78,7 +78,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
         <div
           className={`flex flex-col items-center overflow-hidden transition-all duration-700 ease-in-out ${
             open
-              ? "max-h-[3000px] scale-100 opacity-100"
+              ? "max-h-750 scale-100 opacity-100"
               : "max-h-0 scale-95 opacity-0"
           }`}
         >
@@ -87,7 +87,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mb-[8dvh] h-auto w-screen"
+            className="mb-[4dvh] h-auto w-screen"
           />
 
           <Image
@@ -95,14 +95,9 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mb-[4dvh] h-auto w-[40vw]"
+            className="mb-[4dvh] h-auto w-[30vw]"
           />
-          <p
-            className={`${FONT.imperialScript.className} text-[14vw] leading-[8dvh]`}
-          >
-            Bank BCA
-          </p>
-          <p className={`${FONT.vidaloka.className} text-[4vw] uppercase`}>
+          <p className={`${FONT.vidaloka.className} text-[3vw] uppercase`}>
             No. Rekening {NO_REKENING}
           </p>
           <p className="mb-[4dvh] text-[3vw]">a.n WIDIA LAILATUL A</p>
@@ -125,14 +120,9 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mt-[8dvh] mb-[4dvh] h-auto w-[40vw]"
+            className="mt-[6dvh] mb-[4dvh] h-auto w-[30vw]"
           />
-          <p
-            className={`${FONT.imperialScript.className} text-[14vw] leading-[8dvh]`}
-          >
-            Bank Mandiri
-          </p>
-          <p className={`${FONT.vidaloka.className} text-[4vw] uppercase`}>
+          <p className={`${FONT.vidaloka.className} text-[3vw] uppercase`}>
             No. Rekening {NO_REKENING2}
           </p>
           <p className="mb-[4dvh] text-[3vw]">a.n NOVA AZZAINURRAHMAN</p>
@@ -155,16 +145,16 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mt-[8dvh] mb-[8dvh] h-auto w-screen"
+            className="mt-[4dvh] mb-[4dvh] h-auto w-screen"
           />
 
           <p
-            className={`${FONT.imperialScript.className} mb-[2dvh] text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} text-[8vw] leading-[8dvh]`}
           >
             Kirim Kado
           </p>
           <p
-            className={`${FONT.vidaloka.className} mb-[1dvh] text-center text-[4vw] uppercase`}
+            className={`${FONT.vidaloka.className} mb-[1dvh] text-center text-[3vw] uppercase`}
           >
             {ALAMAT}
           </p>
@@ -188,7 +178,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mt-[8dvh] h-auto w-screen"
+            className="mt-[4dvh] h-auto w-screen"
           />
         </div>
       </div>

@@ -19,21 +19,21 @@ export default function DetailSection({ sectionRef }: SectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[10dvh]"
+      className="relative flex h-dvh w-full flex-col items-center overflow-y-auto bg-cover bg-center bg-no-repeat py-[6dvh]"
       style={{
         backgroundImage: `url('${getCoverUrl()}')`,
       }}
     >
       <div
-        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[6dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-max w-[90vw] flex-col items-center justify-around gap-y-[4dvh] rounded-full border-[2vw] border-[#593520] bg-[#faf3e9b0] px-[8vw] py-[10dvh] text-[#593520]`}
       >
-        <div>
+        <div className="flex flex-col items-center">
           <p
-            className={`${FONT.imperialScript.className} mb-[6dvh] text-center text-[20vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[8vw] leading-[8dvh]`}
           >
-            Bride &<br /> Groom
+            Bride & Groom
           </p>
-          <p className="text-center text-[3vw]">
+          <p className="text-center text-[3vw] w-[60vw]">
             Assalamualaikum Wr. Wb. <br /> Dengan memohon Rahmat & Ridho Allah
             SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri
             acara pernikahan putra-putri kami:
@@ -41,7 +41,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
         </div>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.imperialScript.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
           >
             Widia
           </p>
@@ -64,7 +64,7 @@ export default function DetailSection({ sectionRef }: SectionProps) {
         <p className={`${FONT.cormorantInfant.className} text-[22vw]`}>&</p>
         <div className="flex flex-col items-center">
           <p
-            className={`${FONT.imperialScript.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
+            className={`${FONT.vidaloka.className} mb-[3dvh] text-center text-[14vw] leading-[8dvh]`}
           >
             Nova
           </p>

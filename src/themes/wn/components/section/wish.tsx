@@ -119,83 +119,76 @@ export default function WishSection({ sectionRef }: SectionProps) {
   return (
     <section
       ref={sectionRef}
-      // PERHATIKAN INI! 
-      // Background dipisah biar nggak ikut gerak. Container luarnya tetep 100vh dan overflow-hidden!
-      className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-black px-4"
+      className="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden bg-black px-[4vw]"
     >
-      {/* Background image dibuat absolute dan full, dikasih z-0 biar dipaling belakang */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url('${getBackgroundUrl()}')` }}
       />
       
-      {/* Overlay tipis biar elegan */}
       <div className="absolute inset-0 z-0 bg-black/10 backdrop-blur-[2px]" />
 
       <div
-        // PERHATIKAN INI JUGA! 
-        // Card-nya dikasih max-h-[85vh] sama overflow-y-auto. 
-        // Flex-col, gap, dll tetep.
-        className={`${FONT.openSans.className} relative z-10 flex w-full max-w-lg flex-col gap-y-6 rounded-3xl border border-[#593520]/20 bg-white/85 px-6 py-8 shadow-2xl backdrop-blur-md text-[#593520] sm:px-10 max-h-[85dvh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
+        className={`${FONT.openSans.className} relative z-10 flex w-[90vw] flex-col gap-y-[3vh] rounded-[5vw] border-[0.2vw] border-[#593520]/20 bg-white/85 px-[6vw] py-[4vh] shadow-2xl backdrop-blur-md text-[#593520] max-h-[85dvh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
       >
-        <div className="flex flex-col items-center gap-y-2 flex-shrink-0">
+        <div className="flex flex-col items-center gap-y-[1vh] shrink-0">
           <p
-            className={`${FONT.imperialScript.className} text-center text-5xl sm:text-6xl drop-shadow-sm`}
+            className={`${FONT.vidaloka.className} text-center text-[8vw] drop-shadow-sm`}
           >
             Best Wishes
           </p>
-          <p className="text-center text-sm font-light sm:text-base opacity-80">
+          <p className="text-center text-[3.5vw] font-light opacity-80">
             Sampaikan doa dan ucapan terbaik Anda
           </p>
         </div>
 
         {/* Form Utama */}
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-4 flex-shrink-0">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-[2vh] shrink-0">
           <input
             type="text"
             placeholder="Nama"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-2xl border border-[#593520]/30 bg-white/70 px-5 py-3 text-sm outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white focus:ring-4 focus:ring-[#593520]/10"
+            className="w-full rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white focus:ring-[0.5vw] focus:ring-[#593520]/10"
           />
           <textarea
             placeholder="Tulis ucapan..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={3}
-            className="w-full resize-none rounded-2xl border border-[#593520]/30 bg-white/70 px-5 py-3 text-sm outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white focus:ring-4 focus:ring-[#593520]/10"
+            className="w-full resize-none rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white focus:ring-[0.5vw] focus:ring-[#593520]/10"
           />
           <button
             type="submit"
-            className="mt-2 w-full rounded-2xl bg-[#593520] px-5 py-3 text-sm font-semibold tracking-wide text-white shadow-md transition-all duration-300 hover:bg-[#432717] hover:shadow-lg active:scale-[0.98]"
+            className="mt-[1vh] w-full rounded-[3vw] bg-[#593520] px-[4vw] py-[1.5vh] text-[3.5vw] font-semibold tracking-wide text-white shadow-md transition-all duration-300 hover:bg-[#432717] hover:shadow-lg active:scale-[0.98]"
           >
             Kirim Ucapan
           </button>
         </form>
 
-        <div className="w-full px-4 py-2 flex-shrink-0">
+        <div className="w-full px-[2vw] py-[1vh] shrink-0">
           <Image
             src={ASSETS.Devider.src}
             alt="Divider"
-            width={400}
+            width={400} // Ini cuma untuk prop Next/Image, ukurannya tetap diatur class di bawah
             height={50}
             className="h-auto w-full opacity-70"
           />
         </div>
 
         {/* List Ucapan */}
-        <div className="flex w-full flex-col gap-y-5 flex-grow">
+        <div className="flex w-full flex-col gap-y-[2.5vh] grow">
           {visibleWishes.length > 0 ? (
             visibleWishes.map((wish) => (
               <div
                 key={wish.id}
-                className="group flex w-full flex-col rounded-2xl border border-[#593520]/10 bg-white p-5 shadow-sm transition-all hover:shadow-md"
+                className="group flex w-full flex-col rounded-[4vw] border-[0.2vw] border-[#593520]/10 bg-white p-[4vw] shadow-sm transition-all hover:shadow-md"
               >
                 {/* Header Ucapan */}
-                <div className="mb-2 flex items-start justify-between">
-                  <p className="text-sm font-bold text-[#593520]">{wish.name}</p>
-                  <div className="flex items-center gap-x-1 text-xs text-[#593520]/60">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="mb-[1vh] flex items-start justify-between">
+                  <p className="text-[3.5vw] font-bold text-[#593520]">{wish.name}</p>
+                  <div className="flex items-center gap-x-[1vw] text-[2.5vw] text-[#593520]/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="3vw" height="3vw" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[3vw] h-[3vw]">
                       <circle cx="12" cy="12" r="10"></circle>
                       <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
@@ -203,7 +196,7 @@ export default function WishSection({ sectionRef }: SectionProps) {
                   </div>
                 </div>
                 
-                <p className="text-sm font-light leading-relaxed text-[#593520]/90">
+                <p className="text-[3.5vw] font-light leading-relaxed text-[#593520]/90">
                   {wish.message}
                 </p>
 
@@ -211,7 +204,7 @@ export default function WishSection({ sectionRef }: SectionProps) {
                 {replyingTo !== wish.id && (
                   <button
                     onClick={() => setReplyingTo(wish.id)}
-                    className="mt-3 w-max text-xs font-semibold text-[#593520]/70 transition-all hover:text-[#593520]"
+                    className="mt-[1.5vh] w-max text-[3vw] font-semibold text-[#593520]/70 transition-all hover:text-[#593520]"
                   >
                     Beri Balasan
                   </button>
@@ -221,23 +214,23 @@ export default function WishSection({ sectionRef }: SectionProps) {
                 {replyingTo === wish.id && (
                   <form
                     onSubmit={(e) => handleReplySubmit(e, wish.id)}
-                    className="mt-4 flex flex-col gap-y-2 border-t border-[#593520]/10 pt-4"
+                    className="mt-[2vh] flex flex-col gap-y-[1vh] border-t-[0.2vw] border-[#593520]/10 pt-[2vh]"
                   >
                     <input
                       type="text"
                       placeholder="Nama kamu"
                       value={replyName}
                       onChange={(e) => setReplyName(e.target.value)}
-                      className="w-full rounded-xl border border-[#593520]/30 bg-[#faf3e9]/50 px-3 py-2 text-xs outline-none focus:border-[#593520] focus:bg-white"
+                      className="w-full rounded-[2vw] border-[0.2vw] border-[#593520]/30 bg-[#faf3e9]/50 px-[3vw] py-[1vh] text-[3vw] outline-none focus:border-[#593520] focus:bg-white"
                     />
                     <textarea
                       placeholder="Tulis balasan..."
                       value={replyMessage}
                       onChange={(e) => setReplyMessage(e.target.value)}
                       rows={2}
-                      className="w-full resize-none rounded-xl border border-[#593520]/30 bg-[#faf3e9]/50 px-3 py-2 text-xs outline-none focus:border-[#593520] focus:bg-white"
+                      className="w-full resize-none rounded-[2vw] border-[0.2vw] border-[#593520]/30 bg-[#faf3e9]/50 px-[3vw] py-[1vh] text-[3vw] outline-none focus:border-[#593520] focus:bg-white"
                     />
-                    <div className="flex justify-end gap-x-2">
+                    <div className="flex justify-end gap-x-[2vw]">
                       <button
                         type="button"
                         onClick={() => {
@@ -245,13 +238,13 @@ export default function WishSection({ sectionRef }: SectionProps) {
                           setReplyName("");
                           setReplyMessage("");
                         }}
-                        className="rounded-xl px-3 py-1.5 text-xs font-medium text-[#593520]/70 hover:bg-[#593520]/5"
+                        className="rounded-[2vw] px-[3vw] py-[1vh] text-[3vw] font-medium text-[#593520]/70 hover:bg-[#593520]/5"
                       >
                         Batal
                       </button>
                       <button
                         type="submit"
-                        className="rounded-xl bg-[#593520] px-3 py-1.5 text-xs font-medium text-white transition-all hover:bg-[#432717]"
+                        className="rounded-[2vw] bg-[#593520] px-[3vw] py-[1vh] text-[3vw] font-medium text-white transition-all hover:bg-[#432717]"
                       >
                         Kirim
                       </button>
@@ -261,19 +254,19 @@ export default function WishSection({ sectionRef }: SectionProps) {
 
                 {/* Tampilan List Balasan */}
                 {wish.replies && wish.replies.length > 0 && (
-                  <div className="mt-4 flex flex-col gap-y-3 border-l-2 border-[#593520]/20 pl-4">
+                  <div className="mt-[2vh] flex flex-col gap-y-[1.5vh] border-l-[0.5vw] border-[#593520]/20 pl-[3vw]">
                     {wish.replies.map((reply) => (
-                      <div key={reply.id} className="flex w-full flex-col rounded-xl bg-[#faf3e9]/60 p-3 shadow-sm">
-                        <div className="mb-1 flex items-start justify-between">
-                          <div className="flex items-center gap-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#593520]/50"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
-                            <p className="text-xs font-bold text-[#593520]">{reply.name}</p>
+                      <div key={reply.id} className="flex w-full flex-col rounded-[2vw] bg-[#faf3e9]/60 p-[3vw] shadow-sm">
+                        <div className="mb-[0.5vh] flex items-start justify-between">
+                          <div className="flex items-center gap-x-[1vw]">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[3vw] h-[3vw] text-[#593520]/50"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
+                            <p className="text-[3vw] font-bold text-[#593520]">{reply.name}</p>
                           </div>
-                          <div className="flex items-center gap-x-1 text-[10px] text-[#593520]/60">
+                          <div className="flex items-center gap-x-[1vw] text-[2.5vw] text-[#593520]/60">
                             <span>{getTimeAgo(reply.createdAt)}</span>
                           </div>
                         </div>
-                        <p className="text-xs font-light leading-relaxed text-[#593520]/80 ml-5">
+                        <p className="text-[3vw] font-light leading-relaxed text-[#593520]/80 ml-[4vw]">
                           {reply.message}
                         </p>
                       </div>
@@ -283,27 +276,27 @@ export default function WishSection({ sectionRef }: SectionProps) {
               </div>
             ))
           ) : (
-            <p className="text-center text-sm italic opacity-60">Belum ada ucapan. Jadilah yang pertama!</p>
+            <p className="text-center text-[3.5vw] italic opacity-60">Belum ada ucapan. Jadilah yang pertama!</p>
           )}
         </div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex w-full items-center justify-between px-2 pt-2 flex-shrink-0">
+          <div className="flex w-full items-center justify-between px-[2vw] pt-[1vh] shrink-0">
             <button
               disabled={page === 0}
               onClick={() => setPage(page - 1)}
-              className="flex items-center justify-center rounded-full border border-[#593520] px-5 py-1.5 text-xs font-medium transition-all hover:bg-[#593520] hover:text-white disabled:pointer-events-none disabled:opacity-30"
+              className="flex items-center justify-center rounded-[4vw] border-[0.2vw] border-[#593520] px-[4vw] py-[1vh] text-[3vw] font-medium transition-all hover:bg-[#593520] hover:text-white disabled:pointer-events-none disabled:opacity-30"
             >
               Prev
             </button>
-            <p className="text-xs font-medium opacity-70">
+            <p className="text-[3vw] font-medium opacity-70">
               {page + 1} / {totalPages}
             </p>
             <button
               disabled={page === totalPages - 1}
               onClick={() => setPage(page + 1)}
-              className="flex items-center justify-center rounded-full border border-[#593520] px-5 py-1.5 text-xs font-medium transition-all hover:bg-[#593520] hover:text-white disabled:pointer-events-none disabled:opacity-30"
+              className="flex items-center justify-center rounded-[4vw] border-[0.2vw] border-[#593520] px-[4vw] py-[1vh] text-[3vw] font-medium transition-all hover:bg-[#593520] hover:text-white disabled:pointer-events-none disabled:opacity-30"
             >
               Next
             </button>
