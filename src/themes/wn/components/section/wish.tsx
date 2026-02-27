@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
 import Image from "next/image";
 
-const SCRIPT_URL = process.env.NEXT_PUBLIC_GSHEET_URL!
+const SCRIPT_URL = process.env.NEXT_PUBLIC_GSHEET_URL!;
 
 interface SectionProps {
   isActive: boolean;
@@ -26,10 +26,10 @@ interface Wish {
   name: string;
   message: string;
   createdAt: Date;
-  replies: Reply[]; 
+  replies: Reply[];
 }
 
-export default function WishSection({ sectionRef }: SectionProps) {
+export default function WishSection({ isActive, sectionRef }: SectionProps) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [wishes, setWishes] = useState<Wish[]>([]);
@@ -38,30 +38,35 @@ export default function WishSection({ sectionRef }: SectionProps) {
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyName, setReplyName] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
-  
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasFetched = useRef(false);
 
   const [, setTick] = useState(0);
-  useEffect(() => {
-    const timer = setInterval(() => setTick((t) => t + 1), 60000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
+    if (!isActive) return;
+    const timer = setInterval(() => setTick((t) => t + 1), 60000);
+    return () => clearInterval(timer);
+  }, [isActive]);
+
+  useEffect(() => {
+    if (!isActive || hasFetched.current) return;
+
     const fetchWishes = async () => {
       try {
         const response = await fetch(SCRIPT_URL);
         const result = await response.json();
-        
+
         if (result.status === "success") {
           const formattedData = result.data.map((wish: any) => ({
             ...wish,
             createdAt: new Date(wish.createdAt),
             replies: wish.replies.map((reply: any) => ({
               ...reply,
-              createdAt: new Date(reply.createdAt)
-            }))
+              createdAt: new Date(reply.createdAt),
+            })),
           }));
           setWishes(formattedData);
         }
@@ -72,8 +77,9 @@ export default function WishSection({ sectionRef }: SectionProps) {
       }
     };
 
+    hasFetched.current = true;
     fetchWishes();
-  }, []);
+  }, [isActive]);
 
   const getBackgroundUrl = () => {
     if (!ASSETS?.BackgroundWish) return "";
@@ -106,9 +112,9 @@ export default function WishSection({ sectionRef }: SectionProps) {
     if (!name || !message || isSubmitting) return;
 
     setIsSubmitting(true);
-    
+
     const newWish = {
-      action: "add_wish", 
+      action: "add_wish",
       id: Date.now().toString(),
       nama: name,
       pesan: message,
@@ -126,9 +132,9 @@ export default function WishSection({ sectionRef }: SectionProps) {
         name: newWish.nama,
         message: newWish.pesan,
         createdAt: new Date(newWish.timestamp),
-        replies: [], 
+        replies: [],
       };
-      
+
       setWishes([localWish, ...wishes]);
       setName("");
       setMessage("");
@@ -147,7 +153,7 @@ export default function WishSection({ sectionRef }: SectionProps) {
     setIsSubmitting(true);
 
     const newReply = {
-      action: "add_reply", 
+      action: "add_reply",
       id: Date.now().toString(),
       ref_id: wishId,
       nama: replyName,
@@ -171,7 +177,7 @@ export default function WishSection({ sectionRef }: SectionProps) {
           };
           return {
             ...wish,
-            replies: [...wish.replies, localReply], 
+            replies: [...wish.replies, localReply],
           };
         }
         return wish;
@@ -198,17 +204,17 @@ export default function WishSection({ sectionRef }: SectionProps) {
       ref={sectionRef}
       className="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden bg-black px-[4vw]"
     >
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url('${getBackgroundUrl()}')` }}
       />
-      
-      <div className="absolute inset-0 z-0 bg-black/10 backdrop-blur-[2px]" />
+
+      <div className="absolute inset-0 z-0 transform-gpu bg-black/10 backdrop-blur-[2px] will-change-transform" />
 
       <div
-        className={`${FONT.openSans.className} relative z-10 flex w-[90vw] flex-col gap-y-[3vh] rounded-[5vw] border-[0.2vw] border-[#593520]/20 bg-white/85 px-[6vw] py-[4vh] shadow-2xl backdrop-blur-md text-[#593520] max-h-[85dvh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
+        className={`${FONT.openSans.className} relative z-10 flex max-h-[85dvh] w-[90vw] transform-gpu flex-col gap-y-[3vh] overflow-y-auto rounded-[5vw] border-[0.2vw] border-[#593520]/20 bg-white/85 px-[6vw] py-[4vh] text-[#593520] shadow-2xl backdrop-blur-md will-change-transform [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
       >
-        <div className="flex flex-col items-center gap-y-[1vh] shrink-0">
+        <div className="flex shrink-0 flex-col items-center gap-y-[1vh]">
           <p
             className={`${FONT.vidaloka.className} text-center text-[12vw] drop-shadow-sm`}
           >
@@ -219,14 +225,17 @@ export default function WishSection({ sectionRef }: SectionProps) {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-y-[2vh] shrink-0">
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full shrink-0 flex-col gap-y-[2vh]"
+        >
           <input
             type="text"
             placeholder="Nama"
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isSubmitting}
-            className="w-full rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white disabled:opacity-50"
+            className="w-full rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] transition-all outline-none placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white disabled:opacity-50"
           />
           <textarea
             placeholder="Tulis ucapan..."
@@ -234,30 +243,32 @@ export default function WishSection({ sectionRef }: SectionProps) {
             onChange={(e) => setMessage(e.target.value)}
             disabled={isSubmitting}
             rows={3}
-            className="w-full resize-none rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] outline-none transition-all placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white disabled:opacity-50"
+            className="w-full resize-none rounded-[3vw] border-[0.2vw] border-[#593520]/30 bg-white/70 px-[4vw] py-[1.5vh] text-[3.5vw] transition-all outline-none placeholder:text-[#593520]/50 focus:border-[#593520] focus:bg-white disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-[1vh] w-full rounded-[3vw] bg-[#593520] px-[4vw] py-[1.5vh] text-[3.5vw] font-semibold tracking-wide text-white shadow-md transition-all duration-300 hover:bg-[#432717] hover:shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-[1vh] w-full rounded-[3vw] bg-[#593520] px-[4vw] py-[1.5vh] text-[3.5vw] font-semibold tracking-wide text-white shadow-md transition-all duration-300 hover:bg-[#432717] hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? "Mengirim..." : "Kirim Ucapan"}
           </button>
         </form>
 
-        <div className="w-full px-[2vw] py-[1vh] shrink-0">
+        <div className="w-full shrink-0 px-[2vw] py-[1vh]">
           <Image
             src={ASSETS.Devider.src}
             alt="Divider"
-            width={400} 
+            width={400}
             height={50}
             className="h-auto w-full opacity-70"
           />
         </div>
 
-        <div className="flex w-full flex-col gap-y-[2.5vh] grow">
+        <div className="flex w-full grow flex-col gap-y-[2.5vh]">
           {isLoading ? (
-            <p className="text-center text-[3.5vw] italic opacity-60 animate-pulse">Memuat ucapan...</p>
+            <p className="animate-pulse text-center text-[3.5vw] italic opacity-60">
+              Memuat ucapan...
+            </p>
           ) : visibleWishes.length > 0 ? (
             visibleWishes.map((wish) => (
               <div
@@ -265,17 +276,30 @@ export default function WishSection({ sectionRef }: SectionProps) {
                 className="group flex w-full flex-col rounded-[4vw] border-[0.2vw] border-[#593520]/10 bg-white p-[4vw] shadow-sm transition-all hover:shadow-md"
               >
                 <div className="mb-[1vh] flex items-start justify-between">
-                  <p className="text-[3.5vw] font-bold text-[#593520]">{wish.name}</p>
+                  <p className="text-[3.5vw] font-bold text-[#593520]">
+                    {wish.name}
+                  </p>
                   <div className="flex items-center gap-x-[1vw] text-[2.5vw] text-[#593520]/60">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="3vw" height="3vw" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[3vw] h-[3vw]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="3vw"
+                      height="3vw"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-[3vw] w-[3vw]"
+                    >
                       <circle cx="12" cy="12" r="10"></circle>
                       <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
                     <span>{getTimeAgo(wish.createdAt)}</span>
                   </div>
                 </div>
-                
-                <p className="text-[3.5vw] font-light leading-relaxed text-[#593520]/90">
+
+                <p className="text-[3.5vw] leading-relaxed font-light text-[#593520]/90">
                   {wish.message}
                 </p>
 
@@ -336,17 +360,34 @@ export default function WishSection({ sectionRef }: SectionProps) {
                 {wish.replies && wish.replies.length > 0 && (
                   <div className="mt-[2vh] flex flex-col gap-y-[1.5vh] border-l-[0.5vw] border-[#593520]/20 pl-[3vw]">
                     {wish.replies.map((reply) => (
-                      <div key={reply.id} className="flex w-full flex-col rounded-[2vw] bg-[#faf3e9]/60 p-[3vw] shadow-sm">
+                      <div
+                        key={reply.id}
+                        className="flex w-full flex-col rounded-[2vw] bg-[#faf3e9]/60 p-[3vw] shadow-sm"
+                      >
                         <div className="mb-[0.5vh] flex items-start justify-between">
                           <div className="flex items-center gap-x-[1vw]">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[3vw] h-[3vw] text-[#593520]/50"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
-                            <p className="text-[3vw] font-bold text-[#593520]">{reply.name}</p>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="h-[3vw] w-[3vw] text-[#593520]/50"
+                            >
+                              <polyline points="15 10 20 15 15 20"></polyline>
+                              <path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
+                            </svg>
+                            <p className="text-[3vw] font-bold text-[#593520]">
+                              {reply.name}
+                            </p>
                           </div>
                           <div className="flex items-center gap-x-[1vw] text-[2.5vw] text-[#593520]/60">
                             <span>{getTimeAgo(reply.createdAt)}</span>
                           </div>
                         </div>
-                        <p className="text-[3vw] font-light leading-relaxed text-[#593520]/80 ml-[4vw]">
+                        <p className="ml-[4vw] text-[3vw] leading-relaxed font-light text-[#593520]/80">
                           {reply.message}
                         </p>
                       </div>
@@ -356,12 +397,14 @@ export default function WishSection({ sectionRef }: SectionProps) {
               </div>
             ))
           ) : (
-            <p className="text-center text-[3.5vw] italic opacity-60">Belum ada ucapan. Jadilah yang pertama!</p>
+            <p className="text-center text-[3.5vw] italic opacity-60">
+              Belum ada ucapan. Jadilah yang pertama!
+            </p>
           )}
         </div>
 
         {totalPages > 1 && (
-          <div className="flex w-full items-center justify-between px-[2vw] pt-[1vh] shrink-0">
+          <div className="flex w-full shrink-0 items-center justify-between px-[2vw] pt-[1vh]">
             <button
               disabled={page === 0}
               onClick={() => setPage(page - 1)}
