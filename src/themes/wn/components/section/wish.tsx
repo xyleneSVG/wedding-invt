@@ -209,10 +209,10 @@ export default function WishSection({ isActive, sectionRef }: SectionProps) {
         style={{ backgroundImage: `url('${getBackgroundUrl()}')` }}
       />
 
-      <div className="absolute inset-0 z-0 transform-gpu bg-black/10 backdrop-blur-[2px] will-change-transform" />
+      <div className="absolute inset-0 z-0 transform-gpu bg-black/10 will-change-transform" />
 
       <div
-        className={`${FONT.openSans.className} relative z-10 flex max-h-[85dvh] w-[90vw] transform-gpu flex-col gap-y-[3vh] overflow-y-auto rounded-[5vw] border-[0.2vw] border-[#593520]/20 bg-white/85 px-[6vw] py-[4vh] text-[#593520] shadow-2xl backdrop-blur-md will-change-transform [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
+        className={`${FONT.openSans.className} relative z-10 flex max-h-[85dvh] w-[90vw] transform-gpu flex-col gap-y-[3vh] overflow-y-auto rounded-[5vw] border-[0.2vw] border-[#593520]/20 bg-white/85 px-[6vw] py-[4vh] text-[#593520] shadow-2xl will-change-transform [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
       >
         <div className="flex shrink-0 flex-col items-center gap-y-[1vh]">
           <p
