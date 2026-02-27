@@ -69,7 +69,7 @@ export default function ClosingSection({ isActive }: SectionProps) {
           </p>
 
           <h2
-            className={`mt-[2vh] text-[7vw] font-bold tracking-widest text-[#593520] md:text-[6vh] ${FONT.vidaloka.className}`}
+            className={`mt-[2vh] text-[5vw] font-bold tracking-widest text-[#593520] md:text-[6vh] ${FONT.vidaloka.className}`}
           >
             NOVA & WIDIA
           </h2>
