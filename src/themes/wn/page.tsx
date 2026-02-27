@@ -77,7 +77,7 @@ export default function Page() {
       {stage === "MAIN" && <MainPage />}
 
       <div
-        className={`pointer-events-none fixed inset-0 z-9999 bg-white transition-opacity duration-1000 ease-in-out ${
+        className={`pointer-events-none fixed inset-0 z-50 bg-white transition-opacity duration-1000 ease-in-out ${
           isWhite ? "opacity-100" : "opacity-0"
         }`}
       ></div>

@@ -2,14 +2,17 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import HeroSection from "./section/hero";
-import QuoteSection from "./section/quote";
-import DetailSection from "./section/detail";
-import DateSection from "./section/date";
-import LocationSection from "./section/location";
-import StorySection from "./section/story";
-import GiftSection from "./section/gift";
-import WishSection from "./section/wish";
+
+const QuoteSection = dynamic(() => import("./section/quote"));
+const DetailSection = dynamic(() => import("./section/detail"));
+const DateSection = dynamic(() => import("./section/date"));
+const LocationSection = dynamic(() => import("./section/location"));
+const StorySection = dynamic(() => import("./section/story"));
+const GiftSection = dynamic(() => import("./section/gift"));
+const WishSection = dynamic(() => import("./section/wish"));
+const ClosingSection = dynamic(() => import("./section/closing"));
 
 export default function MainPage() {
   const [activeSection, setActiveSection] = useState(0);
@@ -148,6 +151,7 @@ export default function MainPage() {
           sectionRef={(el) => (sectionRefs.current[6] = el)}
         />
         <WishSection isActive={activeSection === 7} />
+        <ClosingSection isActive={activeSection === 8} />
       </motion.div>
 
       <div className="fixed top-1/2 right-4 z-50 flex -translate-y-1/2 flex-col gap-y-3">

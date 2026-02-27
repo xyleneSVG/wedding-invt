@@ -91,7 +91,7 @@ export default function HeroSection({ isActive }: SectionProps) {
           variants={itemVariants}
           className={`${
             FONT.vidaloka?.className || ""
-          } mb-[2dvh] text-[13vw] leading-tight drop-shadow-lg`}
+          } mb-[2dvh] text-[10vw] leading-tight drop-shadow-lg`}
         >
           Widia & Nova
         </motion.h1>
