@@ -14,7 +14,22 @@ export default function QuoteSection({ isActive }: SectionProps) {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.4, delayChildren: 0.3 },
+      transition: {
+        staggerChildren: 0.25,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
     },
   };
 
@@ -44,21 +59,27 @@ export default function QuoteSection({ isActive }: SectionProps) {
         variants={containerVariants}
         initial="hidden"
         animate={isActive ? "visible" : "hidden"}
-        className={`${FONT.openSans.className} flex h-[60dvh] w-[90vw] flex-col items-center justify-center rounded-[4vw] bg-[#faf3e9b0] px-[10vw] text-[#593520]`}
+        className={`${FONT.openSans.className} flex h-[60dvh] w-[90vw] transform-gpu flex-col items-center justify-center rounded-[4vw] bg-[#faf3e9b0] px-[10vw] text-[#593520] will-change-transform`}
       >
         <motion.p
-          className={`${FONT.vidaloka.className} mb-[2dvh] text-[7vw] font-medium`}
+          variants={itemVariants}
+          className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[7vw] font-medium`}
         >
           WE FOUND LOVE
         </motion.p>
-        <motion.p className="mb-[2dvh] text-center text-[3vw]">
+        <motion.p
+          variants={itemVariants}
+          className="mb-[2dvh] text-center text-[3vw] leading-relaxed"
+        >
           “Dan diantara tanda-tanda kekuasaanNya ialah Dia menciptakan untukmu
           isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa
           tenteram kepadanya, dan dijadikanNya diantaramu rasa kasih dan sayang.
           Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda
           bagi kaum yang berpikir.”
         </motion.p>
-        <motion.p className="text-[3vw]">(Qs. Ar. Rum (30) : 21)</motion.p>
+        <motion.p variants={itemVariants} className="text-center text-[3vw]">
+          (Qs. Ar. Rum (30) : 21)
+        </motion.p>
       </motion.div>
     </section>
   );
