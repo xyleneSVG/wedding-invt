@@ -120,7 +120,7 @@ export default function MainPage() {
 
   return (
     <div
-      className="fixed inset-0 w-full overflow-hidden bg-black text-white"
+      className="fixed inset-0 w-full overflow-hidden bg-white text-white"
       style={{
         height: vh,
         overscrollBehavior: "none",
