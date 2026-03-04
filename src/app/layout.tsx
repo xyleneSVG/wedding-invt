@@ -1,13 +1,14 @@
 import { FONT } from "@/constants/fonts";
-
 import "./globals.css";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { user: string };
+  params: Promise<{ user: string }>;
 }) {
-  if (params.user === "wn") {
+  const { user } = await params;
+
+  if (user === "wn") {
     return {
       title: "The Wedding of Widia & Nova",
       description:
