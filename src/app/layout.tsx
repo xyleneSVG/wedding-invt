@@ -1,25 +1,10 @@
 import { FONT } from "@/constants/fonts";
 import "./globals.css";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ user: string }>;
-}) {
-  const { user } = await params;
-
-  if (user === "wn") {
-    return {
-      title: "The Wedding of Widia & Nova",
-      description:
-        "Kami dengan penuh cinta mengundang Anda untuk hadir di hari bahagia Widia & Nova.",
-    };
-  }
-
-  return {
-    title: "Undangan Digital",
-  };
-}
+export const metadata = {
+  title: "Undangan Digital",
+  description: "Undangan pernikahan digital.",
+};
 
 export default function RootLayout({
   children,
