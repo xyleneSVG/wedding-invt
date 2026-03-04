@@ -15,18 +15,21 @@ export default function HeroSection({ isActive }: SectionProps) {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 11;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
+      videoRef.current.defaultMuted = true;
     }
   }, []);
+
+  const handleVideoLoad = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 11;
+      videoRef.current.play().catch(() => {});
+    }
+  };
 
   const handleVideoLoop = () => {
     if (videoRef.current) {
       videoRef.current.currentTime = 11;
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {});
     }
   };
 
@@ -52,12 +55,14 @@ export default function HeroSection({ isActive }: SectionProps) {
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
         <video
           ref={videoRef}
-          muted={true}
+          autoPlay
+          muted
           playsInline
           className="h-full w-full object-cover"
+          onLoadedMetadata={handleVideoLoad}
           onEnded={handleVideoLoop}
         >
-          <source src={ASSETS.Motion} type="video/mp4" />
+          <source src={`${ASSETS.Motion}#t=11`} type="video/mp4" />
         </video>
       </div>
 
