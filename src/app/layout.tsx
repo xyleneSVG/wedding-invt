@@ -4,8 +4,9 @@ import { FONT } from "@/constants/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Undangan Digital",
-  description: "Wedding Invitation",
+  title: "The Wedding of Widia & Nova",
+  description:
+    "Kami dengan penuh cinta mengundang Anda untuk menjadi bagian dari hari bahagia pernikahan Widia & Nova. Simpan tanggalnya dan rayakan bersama kami.",
 };
 
 export default function RootLayout({

@@ -14,24 +14,16 @@ export default function HeroSection({ isActive }: SectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-    }
+    const playVideo = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.defaultMuted = true;
+        videoRef.current.currentTime = 11;
+        videoRef.current.play().catch(() => {});
+      }
+    }, 100);
+
+    return () => clearTimeout(playVideo);
   }, []);
-
-  const handleVideoLoad = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 11;
-      videoRef.current.play().catch(() => {});
-    }
-  };
-
-  const handleVideoLoop = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 11;
-      videoRef.current.play().catch(() => {});
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -57,10 +49,9 @@ export default function HeroSection({ isActive }: SectionProps) {
           ref={videoRef}
           autoPlay
           muted
+          loop
           playsInline
           className="h-full w-full object-cover"
-          onLoadedMetadata={handleVideoLoad}
-          onEnded={handleVideoLoop}
         >
           <source src={`${ASSETS.Motion}#t=11`} type="video/mp4" />
         </video>
