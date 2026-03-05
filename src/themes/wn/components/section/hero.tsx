@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
 import { motion, Variants } from "framer-motion";
@@ -13,20 +13,22 @@ interface SectionProps {
 export default function HeroSection({ isActive }: SectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  const handleVideoReady = () => {
     if (videoRef.current) {
       videoRef.current.currentTime = 11;
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          console.log("iOS rese ngeblok autoplay, tapi tenang aja.");
+        });
       }
     }
-  }, []);
+  };
 
   const handleVideoLoop = () => {
     if (videoRef.current) {
       videoRef.current.currentTime = 11;
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {});
     }
   };
 
@@ -52,9 +54,12 @@ export default function HeroSection({ isActive }: SectionProps) {
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
         <video
           ref={videoRef}
-          muted={true}
+          autoPlay
+          muted
           playsInline
+          preload="auto"
           className="h-full w-full object-cover"
+          onLoadedMetadata={handleVideoReady}
           onEnded={handleVideoLoop}
         >
           <source src={ASSETS.Motion} type="video/mp4" />
