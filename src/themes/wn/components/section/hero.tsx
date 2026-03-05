@@ -15,7 +15,7 @@ export default function HeroSection({ isActive }: SectionProps) {
 
   const handleVideoReady = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 11;
+      videoRef.current.currentTime = 10;
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
