@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import CoverPage from "./components/cover";
 import MainPage from "./components/main";
 import MusicPlayer from "./components/musicPlayer";
 import { ASSETS } from "./constant/assets";
 
 export default function Page() {
-  const [stage, setStage] = useState<"COVER" | "INTRO" | "MAIN">("COVER");
+  const [stage, setStage] = useState<"COVER" | "INTRO" | "TRANSITION" | "MAIN">(
+    "COVER",
+  );
   const [isWhite, setIsWhite] = useState(false);
   const [startMusic, setStartMusic] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement>(null);
@@ -17,17 +19,15 @@ export default function Page() {
     setStartMusic(true);
     setTimeout(() => {
       setStage("INTRO");
-      setTimeout(() => setIsWhite(false), 500);
+      setIsWhite(false);
     }, 1000);
   };
 
   const handleIntroEnd = () => {
     setIsWhite(true);
     setTimeout(() => {
-      setStage("MAIN");
-      setTimeout(() => {
-        setIsWhite(false);
-      }, 500);
+      setStage("TRANSITION");
+      setIsWhite(false);
     }, 1000);
   };
 
@@ -43,6 +43,23 @@ export default function Page() {
     }
   };
 
+  useEffect(() => {
+    if (stage === "TRANSITION") {
+      const img = new Image();
+      img.src = ASSETS.Wayang.src;
+
+      const timer = setTimeout(() => {
+        setIsWhite(true);
+        setTimeout(() => {
+          setStage("MAIN");
+          setIsWhite(false);
+        }, 1000);
+      }, 3500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [stage]);
+
   return (
     <div className="relative w-full">
       {stage === "COVER" && (
@@ -52,7 +69,7 @@ export default function Page() {
       )}
 
       {stage === "INTRO" && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
           <video
             ref={introVideoRef}
             autoPlay
@@ -71,6 +88,19 @@ export default function Page() {
           >
             Skip Intro
           </button>
+        </div>
+      )}
+
+      {stage === "TRANSITION" && (
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-white p-[5vw] text-center text-[#593520]">
+          <div className="animate-pulse">
+            <h2 className="mb-[2dvh] text-[6vw] italic">
+              &ldquo;Dua jiwa, satu tujuan...&ldquo;
+            </h2>
+            <p className="text-[3.5vw] tracking-widest uppercase opacity-70">
+              Menyiapkan Memori
+            </p>
+          </div>
         </div>
       )}
 
