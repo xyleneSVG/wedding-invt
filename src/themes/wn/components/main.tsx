@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -15,6 +16,7 @@ const WishSection = dynamic(() => import("./section/wish"));
 const ClosingSection = dynamic(() => import("./section/closing"));
 
 export default function MainPage() {
+  const [playHeroVideo, setPlayHeroVideo] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
   const [vh, setVh] = useState(0);
 
@@ -28,12 +30,15 @@ export default function MainPage() {
     const setRealVH = () => {
       setVh(window.innerHeight);
     };
+    if (activeSection === 0) {
+      setPlayHeroVideo(true);
+    }
 
     setRealVH();
     window.addEventListener("resize", setRealVH);
 
     return () => window.removeEventListener("resize", setRealVH);
-  }, []);
+  }, [activeSection]);
 
   const canScrollInternal = useCallback(
     (direction: "UP" | "DOWN") => {
@@ -131,7 +136,7 @@ export default function MainPage() {
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         style={{ height: vh * SECTIONS }}
       >
-        <HeroSection isActive={activeSection === 0} />
+        <HeroSection isActive={activeSection === 0} playVideo={playHeroVideo} />
         <QuoteSection isActive={activeSection === 1} />
         <DetailSection
           isActive={activeSection === 2}

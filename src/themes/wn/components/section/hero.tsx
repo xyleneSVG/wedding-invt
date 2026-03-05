@@ -8,26 +8,30 @@ import Image from "next/image";
 
 interface SectionProps {
   isActive: boolean;
+  playVideo: boolean;
 }
 
-export default function HeroSection({ isActive }: SectionProps) {
+export default function HeroSection({ isActive, playVideo }: SectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 11;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    }
-  }, []);
+  const START_TIME = 11;
 
-  const handleVideoLoop = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 11;
-      videoRef.current.play();
-    }
+  useEffect(() => {
+    if (!playVideo) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.currentTime = START_TIME;
+    video.play().catch(() => {});
+  }, [playVideo]);
+
+  const handleLoop = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.currentTime = START_TIME;
+    video.play().catch(() => {});
   };
 
   const containerVariants: Variants = {
@@ -52,10 +56,12 @@ export default function HeroSection({ isActive }: SectionProps) {
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
         <video
           ref={videoRef}
-          muted={true}
+          muted
+          autoPlay
           playsInline
+          preload="auto"
+          onEnded={handleLoop}
           className="h-full w-full object-cover"
-          onEnded={handleVideoLoop}
         >
           <source src={ASSETS.Motion} type="video/mp4" />
         </video>
