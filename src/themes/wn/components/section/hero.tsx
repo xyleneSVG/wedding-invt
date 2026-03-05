@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
 import { motion, Variants } from "framer-motion";
@@ -12,6 +12,7 @@ interface SectionProps {
 
 export default function HeroSection({ isActive }: SectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const handleVideoReady = () => {
     if (videoRef.current) {
@@ -60,6 +61,7 @@ export default function HeroSection({ isActive }: SectionProps) {
           preload="auto"
           className="h-full w-full object-cover"
           onLoadedMetadata={handleVideoReady}
+          onPlaying={() => setIsVideoPlaying(true)}
           onEnded={handleVideoLoop}
         >
           <source src={ASSETS.Motion} type="video/mp4" />
@@ -69,7 +71,7 @@ export default function HeroSection({ isActive }: SectionProps) {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
+        animate={isActive && isVideoPlaying ? "visible" : "hidden"}
         className="relative z-10 flex h-full flex-col items-center justify-center px-[5vw] pb-[20dvh] text-center text-[#593520]"
       >
         <motion.div variants={itemVariants} className="mb-[4dvh]">
