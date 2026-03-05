@@ -27,7 +27,7 @@ export default function HeroSection({ isActive }: SectionProps) {
 
   const handleVideoLoop = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = 11;
+      videoRef.current.currentTime = 10;
       videoRef.current.play().catch(() => {});
     }
   };
