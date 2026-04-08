@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { ASSETS } from "../../constant/assets";
 import { FONT } from "@/constants/fonts";
 import { motion, Variants } from "framer-motion";
@@ -11,28 +10,6 @@ interface SectionProps {
 }
 
 export default function HeroSection({ isActive }: SectionProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-
-  const handleVideoReady = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 10;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          console.log("iOS rese ngeblok autoplay, tapi tenang aja.");
-        });
-      }
-    }
-  };
-
-  const handleVideoLoop = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 10;
-      videoRef.current.play().catch(() => {});
-    }
-  };
-
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -52,26 +29,21 @@ export default function HeroSection({ isActive }: SectionProps) {
 
   return (
     <section className="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden">
+      
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          className="h-full w-full object-cover"
-          onLoadedMetadata={handleVideoReady}
-          onPlaying={() => setIsVideoPlaying(true)}
-          onEnded={handleVideoLoop}
-        >
-          <source src={ASSETS.Motion} type="video/mp4" />
-        </video>
+        <Image
+          src={ASSETS.MainBg} 
+          alt="Wedding Background"
+          fill
+          priority
+          className="object-cover"
+        />
       </div>
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate={isActive && isVideoPlaying ? "visible" : "hidden"}
+        animate={isActive ? "visible" : "hidden"} 
         className="relative z-10 flex h-full flex-col items-center justify-center px-[5vw] pb-[20dvh] text-center text-[#593520]"
       >
         <motion.div variants={itemVariants} className="mb-[4dvh]">
@@ -100,7 +72,7 @@ export default function HeroSection({ isActive }: SectionProps) {
             FONT.vidaloka?.className || ""
           } mb-[2dvh] text-[10vw] leading-tight drop-shadow-lg`}
         >
-         Nova & Widia 
+          Nova & Widia
         </motion.h1>
 
         <motion.p

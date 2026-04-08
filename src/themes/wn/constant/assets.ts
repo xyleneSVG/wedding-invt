@@ -10,6 +10,7 @@ import MANDIRI from "@/themes/wn/assets/img/mandiri.png";
 import BackgroundWish from "@/themes/wn/assets/img/wish.png";
 import BackgroundClosing from "@/themes/wn/assets/img/closing.jpg";
 import BirdLottie from "@/themes/wn/assets/bird.json";
+import MainBg from "@/themes/wn/assets/img/main.png"; 
 
 export const ASSETS = {
   Cover,
@@ -24,5 +25,6 @@ export const ASSETS = {
   MANDIRI,
   BackgroundWish,
   BackgroundClosing,
-  BirdLottie
+  BirdLottie,
+  MainBg
 };
