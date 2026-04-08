@@ -77,19 +77,19 @@ export default function DetailSection({ isActive, sectionRef }: SectionProps) {
           <p
             className={`${FONT.vidaloka.className} text-center text-[8vw] leading-[8dvh]`}
           >
-            Widia
+            Nova
           </p>
           <p
             className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[4vw] font-medium uppercase`}
           >
-            widia lailatul annisa
+            Nova Azzainurrahman Fauzi
           </p>
           <p className="mb-[2dvh] w-[60vw] text-center text-[3vw]">
-            Putri pertama dari Bapak Arkok Slamet Widodo dan Ibu Mundriyanah
+            Putra pertama dari Bapak Achmad Isman dan Ibu Sri Rahayuni
           </p>
           <Link
             href={
-              "https://www.instagram.com/widianyss_?igsh=MTBkejB5dnloZXpuMw=="
+              "https://www.instagram.com/nvafzyy?igsh=MTgycGl3eWE5NngxMg=="
             }
             className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white transition-transform active:scale-95"
           >
@@ -112,18 +112,18 @@ export default function DetailSection({ isActive, sectionRef }: SectionProps) {
           <p
             className={`${FONT.vidaloka.className} text-center text-[8vw] leading-[8dvh]`}
           >
-            Nova
+            Widia
           </p>
           <p
             className={`${FONT.vidaloka.className} mb-[2dvh] text-center text-[4vw] font-medium uppercase`}
           >
-            nova azzainurrahman fauzi
+            Widia Lailatul Annisa
           </p>
           <p className="mb-[2dvh] w-[60vw] text-center text-[3vw]">
-            Putra pertama dari Bapak Achmad Isman dan Ibu Sri Rahayuni
+            Putri pertama dari Bapak Arkok Slamet Widodo dan Ibu Mundriyanah 
           </p>
           <Link
-            href={"https://www.instagram.com/nvafzyy?igsh=MTgycGl3eWE5NngxMg=="}
+            href={"https://www.instagram.com/widianyss_?igsh=MTBkejB5dnloZXpuMw=="}
             className="flex w-max flex-row gap-x-[2vw] rounded-full bg-[#593520] px-[4vw] py-[1dvh] text-[3vw] font-medium text-white transition-transform active:scale-95"
           >
             <Instagram className="size-[4vw]" />

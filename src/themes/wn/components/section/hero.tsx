@@ -100,7 +100,7 @@ export default function HeroSection({ isActive }: SectionProps) {
             FONT.vidaloka?.className || ""
           } mb-[2dvh] text-[10vw] leading-tight drop-shadow-lg`}
         >
-          Widia & Nova
+         Nova & Widia 
         </motion.h1>
 
         <motion.p

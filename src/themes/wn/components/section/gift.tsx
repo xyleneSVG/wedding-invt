@@ -91,31 +91,6 @@ export default function GiftSection({ sectionRef }: SectionProps) {
           />
 
           <Image
-            src={ASSETS.BCA.src}
-            alt=""
-            width={1920}
-            height={720}
-            className="mb-[4dvh] h-auto w-[30vw]"
-          />
-          <p className={`${FONT.vidaloka.className} text-[3vw] uppercase`}>
-            No. Rekening {NO_REKENING}
-          </p>
-          <p className="mb-[4dvh] text-[3vw]">a.n WIDIA LAILATUL A</p>
-          <button
-            onClick={handleCopy}
-            className={`flex gap-x-[2vw] rounded-[2vw] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white transition ${
-              isCopied ? "bg-green-600" : "bg-[#593520]"
-            }`}
-          >
-            {isCopied ? "BERHASIL DISALIN" : "SALIN NOMOR"}
-            {isCopied ? (
-              <Check className="size-[4vw]" />
-            ) : (
-              <Copy className="size-[4vw]" />
-            )}
-          </button>
-
-          <Image
             src={ASSETS.MANDIRI.src}
             alt=""
             width={1920}
@@ -134,6 +109,31 @@ export default function GiftSection({ sectionRef }: SectionProps) {
           >
             {isCopied2 ? "BERHASIL DISALIN" : "SALIN NOMOR"}
             {isCopied2 ? (
+              <Check className="size-[4vw]" />
+            ) : (
+              <Copy className="size-[4vw]" />
+            )}
+          </button>
+
+          <Image
+            src={ASSETS.BCA.src}
+            alt=""
+            width={1920}
+            height={720}
+            className="mb-[4dvh] h-auto w-[30vw]"
+          />
+          <p className={`${FONT.vidaloka.className} text-[3vw] uppercase`}>
+            No. Rekening {NO_REKENING}
+          </p>
+          <p className="mb-[4dvh] text-[3vw]">a.n WIDIA LAILATUL A</p>
+          <button
+            onClick={handleCopy}
+            className={`flex gap-x-[2vw] rounded-[2vw] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white transition ${
+              isCopied ? "bg-green-600" : "bg-[#593520]"
+            }`}
+          >
+            {isCopied ? "BERHASIL DISALIN" : "SALIN NOMOR"}
+            {isCopied ? (
               <Check className="size-[4vw]" />
             ) : (
               <Copy className="size-[4vw]" />

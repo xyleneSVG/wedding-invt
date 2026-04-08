@@ -10,13 +10,13 @@ export async function generateMetadata({
 
   if (user === "wn") {
     return {
-      title: "The Wedding of Widia & Nova",
+      title: "The Wedding of Nova  & Widia",
       description:
-        "Kami dengan penuh cinta mengundang Anda untuk hadir di hari bahagia Widia & Nova.",
+        "Kami dengan penuh cinta mengundang Anda untuk hadir di hari bahagia Nova  & Widia.",
       openGraph: {
-        title: "The Wedding of Widia & Nova",
+        title: "The Wedding of Nova  & Widia",
         description:
-          "Kami dengan penuh cinta mengundang Anda untuk hadir di hari bahagia Widia & Nova.",
+          "Kami dengan penuh cinta mengundang Anda untuk hadir di hari bahagia Nova  & Widia.",
       },
     };
   }
