@@ -29,7 +29,7 @@ export default function CoverPage({ onOpen }: Props) {
         <h1
           className={`${FONT.vidaloka.className} mb-[10dvh] text-[10vw] leading-tight drop-shadow-lg`}
         >
-          Widia & Nova
+          Nova & Widia
         </h1>
         <p className="mb-[2dvh] text-[3.5vw] font-semibold tracking-[0.5vw]">
           Kepada Yth.
