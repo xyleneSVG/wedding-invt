@@ -95,7 +95,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mt-[6dvh] mb-[4dvh] h-auto w-[30vw]"
+            className="mb-[4dvh] h-auto w-[30vw]"
           />
           <p className={`${FONT.vidaloka.className} text-[3vw] uppercase`}>
             No. Rekening {NO_REKENING2}
@@ -103,7 +103,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
           <p className="mb-[4dvh] text-[3vw]">a.n NOVA AZZAINURRAHMAN</p>
           <button
             onClick={handleCopy2}
-            className={`flex gap-x-[2vw] rounded-[2vw] px-[4vw] py-[1.5dvh] text-[3vw] font-medium text-white transition ${
+            className={`flex gap-x-[2vw] rounded-[2vw] px-[4vw] py-[1.5dvh] text-[3vw] mb-[4vh] font-medium text-white transition ${
               isCopied2 ? "bg-green-600" : "bg-[#593520]"
             }`}
           >
@@ -120,7 +120,7 @@ export default function GiftSection({ sectionRef }: SectionProps) {
             alt=""
             width={1920}
             height={720}
-            className="mb-[4dvh] h-auto w-[30vw]"
+            className="mb-[4dvh] mt-[4dvh] h-auto w-[30vw]"
           />
           <p className={`${FONT.vidaloka.className} text-[3vw] uppercase`}>
             No. Rekening {NO_REKENING}
