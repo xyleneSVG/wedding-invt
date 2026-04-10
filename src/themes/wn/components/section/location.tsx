@@ -98,7 +98,7 @@ export default function LocationSection({
               MINGGU | 14 . 06 . 2026
             </p>
             <p className="mb-[4dvh] w-[60vw] text-center text-[4vw]">
-              Pukul menyusul WIB
+              Pukul 10:00 WIB
             </p>
             <MapPin className="mb-[2dvh] size-[10vw]" />
             <p className="mb-[4dvh] w-[60vw] text-center text-[3vw]">
@@ -139,7 +139,7 @@ export default function LocationSection({
               MINGGU | 14 . 06 . 2026
             </p>
             <p className="mb-[4dvh] w-[60vw] text-center text-[4vw]">
-              Pukul menyusul WIB
+              Pukul 13:00 WIB
             </p>
             <MapPin className="mb-[2dvh] size-[10vw]" />
             <p className="mb-[4dvh] w-[60vw] text-center text-[3vw]">
